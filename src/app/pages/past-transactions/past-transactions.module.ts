@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 // import { NgChartsModule } from 'ng2-charts';
 import { PastTransactionsPageRoutingModule } from './past-transactions-routing.module';
 import { PastTransactionsPage } from './past-transactions.page';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
+
 
 @NgModule({
   imports: [
@@ -12,6 +14,7 @@ import { PastTransactionsPage } from './past-transactions.page';
     FormsModule,
     IonicModule,
     PastTransactionsPageRoutingModule,
+    SharedModule
     // NgChartsModule
   ],
   declarations: [PastTransactionsPage]

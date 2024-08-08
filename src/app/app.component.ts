@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { AuthService } from './services/userauth.service';
 import { Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,11 +13,17 @@ export class AppComponent implements OnInit {
   isAuthenticated = false;
   isSidebarVisible = false;
 
-  constructor(private auth: Auth, private authService: AuthService, private router: Router) {}
+  constructor(private auth: Auth, private authService: AuthService, private router: Router, private primengConfig: PrimeNGConfig) {}
 
   ngOnInit() {
     this.checkAuthentication();
     this.checkScreenWidth();
+    this.primengConfig.zIndex = {
+      modal: 1100,    // dialog, sidebar
+      overlay: 1000,  // dropdown, overlaypanel
+      menu: 1000,     // overlay menus
+      tooltip: 1100   // tooltip
+  };
   }
 
   async onLogout(){

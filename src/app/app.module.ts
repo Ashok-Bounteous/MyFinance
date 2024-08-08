@@ -37,6 +37,9 @@ register();
 import { Plugins } from '@capacitor/core';
 const { Keyboard } = Plugins;
 
+import { SharedModule } from './shared/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [AppComponent, NavbarComponent, SidebarComponent],
   imports: [
@@ -52,7 +55,8 @@ const { Keyboard } = Plugins;
     ReactiveFormsModule, 
     FormsModule,
     AppStoreModule,
-    LoadingModule,
+    SharedModule,
+    BrowserAnimationsModule
     
   
   ],
