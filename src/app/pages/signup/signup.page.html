@@ -1,0 +1,70 @@
+<!-- <ion-content fullscreen="true" class="signup-content">
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="primary"><strong>SignUp</strong></ion-card-title>
+        <ion-card-subtitle color="primary">Enter the registration details below</ion-card-subtitle>
+      </ion-card-header>
+      <div class="container">
+        <div class="form-container">
+          <ion-input label="Email" labelPlacement="floating" fill="outline" placeholder="Email" type="email"></ion-input>
+          <ion-input     
+          labelPlacement="floating"          label="Password"
+          fill="outline" placeholder="Password" [(ngModel)]="password" type="password"></ion-input>
+          <ion-input labelPlacement="floating"          label="Password"
+          fill="outline" placeholder="Confirm Password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" type="password"></ion-input>
+          <ion-button expand="block" class="rounded-outline" (click)="signup()">Sign Up</ion-button>
+          <p>
+            Already have an account? <a routerLink="/login">Login</a>
+          </p>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+</ion-content> -->
+
+
+<ion-content fullscreen="true" class="signup-content">
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="primary"><strong>Sign Up</strong></ion-card-title>
+        <ion-card-subtitle color="primary">Enter the registration details below</ion-card-subtitle>
+      </ion-card-header>
+      <div class="container">
+        <div class="form-container">
+          <form [formGroup]="signupForm" (ngSubmit)="register()">
+            <ion-input
+              formControlName="email"
+              label="Email"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Email"
+              type="email"
+            ></ion-input>
+            <ion-input
+              formControlName="password"
+              label="Password"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Password"
+              type="password"
+            ></ion-input>
+            <ion-input
+              formControlName="confirmPassword"
+              label="Confirm Password"
+              labelPlacement="floating"
+              fill="outline"
+              placeholder="Confirm Password"
+              type="password"
+            ></ion-input>
+            <ion-button expand="block" class="rounded-outline" type="submit" [disabled]="signupForm.invalid">Sign Up</ion-button>
+          </form>
+          <p>
+            Already have an account? <a routerLink="/login">Login</a>
+          </p>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

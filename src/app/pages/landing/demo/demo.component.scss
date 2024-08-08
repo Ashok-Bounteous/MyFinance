@@ -1,0 +1,68 @@
+.home-content {
+    --background: linear-gradient(135deg, #3498db, #8e44ad);
+  
+    .greeting {
+      text-align: center;
+      color: white;
+      margin-top: 20px;
+  
+      h2 {
+        font-size: 2rem;
+      }
+  
+      p {
+        font-size: 1rem;
+        margin-top: 5px;
+      }
+    }
+  
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+  
+      .option-card {
+        width: calc(50% - 20px);
+        margin: 10px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+        ion-card-title {
+          text-align: center;
+          color: #3498db;
+        }
+      }
+    }
+  }
+  
+
+  .finance-content {
+    --background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  
+    .finance-summary {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+  
+      .income, .expenses {
+        text-align: center;
+        color: white;
+  
+        h3 {
+          font-size: 1.5rem;
+        }
+  
+        p {
+          font-size: 2rem;
+        }
+      }
+    }
+  
+    .budget-chart {
+      padding: 20px;
+      /* Add your chart styles here */
+    }
+  }
+  

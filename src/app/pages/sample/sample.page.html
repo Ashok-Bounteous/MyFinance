@@ -1,0 +1,62 @@
+<!-- <canvas baseChart [data]="" [options]="barChartOptions" [type]="'bar'"> </canvas> -->
+<!-- <div>
+  <ion-grid [fixed]="true">
+    <ion-row>
+      <ion-col>
+        <canvas id="myChart"></canvas>
+      </ion-col>
+      <ion-col>
+        <canvas id="linech"></canvas>
+      </ion-col>
+      <ion-col>
+        <canvas id="pie"></canvas>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div> -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<ion-content scrollY="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2>Bar Chart</h2>
+        <canvas id="barchart"></canvas>
+      </ion-col>
+      <ion-col>
+        <h2>Pie Chart</h2>
+        <canvas id="piechart"></canvas>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2>Line Chart</h2>
+        <canvas id="linech"></canvas>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<!-- <script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script> -->

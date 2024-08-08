@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true" scrollY="true">
+  <div class="container">
+    <div class="hero">
+      <h1><strong>Welcome to MyFinance</strong></h1>
+      <h1>Manage Your Finances Effectively</h1>
+      <p>Track expenses, plan budgets, analyze market conditions, and achieve your financial goals.</p>
+      <ion-button (click)="navigateToSignUp()">Get Started</ion-button>
+    </div>
+    <div class="features">
+      <div class="feature" *ngFor="let feature of features">
+        <ion-icon [name]="feature.icon"></ion-icon>
+        <h2>{{ feature.title }}</h2>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+  <!-- <app-landing-page></app-landing-page>
+  <app-landing-page></app-landing-page> -->
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button *ngIf="showScrollTopButton" (click)="scrollToTop()">
+      <ion-icon name="arrow-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+  
+  <!-- <app-demo></app-demo>
+  <app-demo2></app-demo2> -->
+  

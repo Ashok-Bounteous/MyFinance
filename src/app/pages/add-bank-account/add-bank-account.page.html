@@ -1,0 +1,81 @@
+<ion-content scrollY="true">
+  <div class="info">
+    <h2>Add Bank Account</h2>
+    <p>Fill out the form below to add your bank account details.</p>
+  </div>
+  <form [formGroup]="bankAccountForm" (ngSubmit)="onSubmit()" class="form-container">
+    <ion-item lines="none">
+      <ion-input 
+        label="Account Holder Name" 
+        labelPlacement="floating" 
+        placeholder="Enter the Account Holder Name" 
+        formControlName="accountName" 
+        required
+        lines="none"
+        errorText="Account Name is required and should be at least 2 characters long."
+        >
+      </ion-input>
+      <!-- <ion-note *ngIf="bankAccountForm.get('accountName')?.invalid && bankAccountForm.get('accountName')?.touched" color="danger">
+        Account Name is required and should be at least 2 characters long.
+      </ion-note> -->
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input 
+        label="Bank Name" 
+        labelPlacement="floating" 
+        placeholder="Enter the Bank Name" 
+        formControlName="bankName" 
+        required
+        errorText="Bank Name is required and should be at least 2 characters long.">
+      </ion-input>
+      <!-- <ion-note *ngIf="bankAccountForm.get('bankName')?.invalid && bankAccountForm.get('bankName')?.touched" color="danger">
+        Bank Name is required and should be at least 2 characters long.
+      </ion-note> -->
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input 
+        label="Account Number" 
+        labelPlacement="floating" 
+        placeholder="Enter the Account Number" 
+        type="number" 
+        minlength="10"
+        [counter]="true"
+        formControlName="accountNumber" 
+        required
+        errorText="Account Number is required and should be at least 10 digits long.">
+      </ion-input>
+      <!-- <ion-note *ngIf="bankAccountForm.get('accountNumber')?.invalid && bankAccountForm.get('accountNumber')?.touched" color="danger">
+        Account Number is required and should be at least 10 digits long.
+      </ion-note> -->
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input 
+        label="IFSC Code" 
+        labelPlacement="floating" 
+        placeholder="Enter the IFSC Code" 
+        formControlName="ifscCode" 
+        maxlength="11"
+        [counter]="true"
+        required
+        errorText="IFSC Code is required and should be 11 characters long with the correct format.">
+      </ion-input>
+      <!-- <ion-note *ngIf="bankAccountForm.get('ifscCode')?.invalid && bankAccountForm.get('ifscCode')?.touched" color="danger">
+        IFSC Code is required and should be 11 characters long with the correct format.
+      </ion-note> -->
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input 
+        label="Branch" 
+        labelPlacement="floating" 
+        placeholder="Enter the Branch" 
+        formControlName="branch" 
+        required
+        errorText="Branch is required and should be at least 2 characters long.">
+      </ion-input>
+      <!-- <ion-note *ngIf="bankAccountForm.get('branch')?.invalid && bankAccountForm.get('branch')?.touched" color="danger">
+        Branch is required and should be at least 2 characters long.
+      </ion-note> -->
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="!bankAccountForm.valid">Add Account</ion-button>
+  </form>
+</ion-content>

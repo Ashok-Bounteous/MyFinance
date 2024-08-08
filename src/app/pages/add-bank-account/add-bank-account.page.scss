@@ -1,0 +1,64 @@
+ion-content {
+  --background: url('/assets/landing1.png') no-repeat center center fixed;
+  --background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.info {
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    opacity: 0.8;
+  }
+}
+
+.form-container {
+  border: 2px solid rgba(54, 162, 235, 1);
+  border-radius: 10px;
+  padding: 20px;
+  width: 40%;
+  height: auto;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+ion-item {
+  --background: transparent;
+  width: 100%;
+  border: 1px solid rgba(54, 162, 235, 1);
+  border-radius: 5px;
+  margin-bottom: 16px;
+  flex-direction: row;
+}
+
+ion-input {
+  --padding-start: 1px;
+}
+
+ion-note {
+  font-size: 12px;
+  color: #ff3e3e;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+ion-button {
+  margin-top: 16px;
+  width: 100%;
+}

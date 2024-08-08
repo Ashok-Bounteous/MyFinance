@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>MyApp</ion-title>
+    <ion-list>
+      <ion-item button routerLink="/landing">Landing</ion-item>
+      <ion-item button routerLink="/signup">Signup</ion-item>
+      <ion-item button routerLink="/login">Login</ion-item>
+      <ion-item button routerLink="/dashboard">Dashboard</ion-item>
+      <ion-item button routerLink="/company-data">Company Data</ion-item>
+      <ion-item button routerLink="/task-manager">Task Manager</ion-item>
+      <ion-item button (click)="onLogout()">Logout</ion-item>
+    </ion-list>
+  </ion-toolbar>
+</ion-header>

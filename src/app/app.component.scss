@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+}
+
+ion-content {
+  // Remove any fixed height settings
+  // Let Ionic handle the height
+  // min-height: 100%;
+  // max-height: auto;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 0;
+}
+
+@media (min-width: 760px) {
+  .main-content {
+    margin-left: 250px; // Adjust this value based on your sidebar width
+  }
+}
+
+ion-header {
+  ion-toolbar {
+    background-color: #f8f9fa;
+    color: #343a40;
+
+    ion-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    ion-buttons {
+      ion-button {
+        ion-icon {
+          font-size: 1.5rem;
+          color: #343a40;
+        }
+      }
+    }
+
+    app-navbar {
+      display: none;
+    }
+
+    @media (min-width: 760px) {
+      app-navbar {
+        display: block;
+      }
+
+      ion-buttons {
+        display: none;
+      }
+
+      ion-title {
+        display: none;
+      }
+    }
+  }
+}

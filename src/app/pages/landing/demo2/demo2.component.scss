@@ -1,0 +1,39 @@
+.cards-content {
+    --background: linear-gradient(135deg, #ff6e7f, #bfe9ff);
+  
+    .card-list {
+      padding: 20px;
+  
+      .card-item {
+        background: white;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+        ion-card-title {
+          color: #ff6e7f;
+        }
+      }
+    }
+  }
+
+  
+  .transaction-content {
+    --background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  
+    .transaction-list {
+      padding: 20px;
+  
+      .transaction-item {
+        background: white;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+        ion-card-title {
+          color: #3498db;
+        }
+      }
+    }
+  }
+  

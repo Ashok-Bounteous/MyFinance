@@ -1,0 +1,19 @@
+ion-content {
+    --background: url('/assets/image.png') no-repeat center center fixed;
+    --background-size: cover;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  ion-item {
+    margin-bottom: 16px;
+  }
+  
+  ion-button {
+    margin-top: 16px;
+  }
+  

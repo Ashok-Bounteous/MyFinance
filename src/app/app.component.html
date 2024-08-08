@@ -1,0 +1,63 @@
+<ion-app>
+  <ion-menu type="push" menuId="myMenu" content-id="main-content">
+    <ion-content class="ion-padding">
+      <ion-menu-toggle>
+        <ion-button>X</ion-button>
+        <ion-item>
+          <ion-icon name="home" slot="start"></ion-icon>
+          <a routerLink="/landing" class="menu-link">Landing</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="person-add" slot="start"></ion-icon>
+          <a routerLink="/signup" class="menu-link">Signup</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="log-in" slot="start"></ion-icon>
+          <a routerLink="/login" class="menu-link">Login</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="speedometer" slot="start"></ion-icon>
+          <a routerLink="/dashboard" class="menu-link">Dashboard</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="stats-chart" slot="start"></ion-icon>
+          <a routerLink="/company-data" class="menu-link">Company Data</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="clipboard" slot="start"></ion-icon>
+          <a routerLink="/task-manager" class="menu-link">Task Manager</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+        <ion-item *ngIf="isAuthenticated" (click)="onLogout()">
+          <ion-icon name="log-out" slot="start"></ion-icon>
+          <a href="#" class="menu-link">Logout</a>
+          <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start" *ngIf="!isSidebarVisible">
+          <ion-menu-toggle>
+            <ion-button>
+              <ion-icon slot="icon-only" name="menu"></ion-icon>
+            </ion-button>
+          </ion-menu-toggle>
+        </ion-buttons>
+        <ion-title *ngIf="!isSidebarVisible">MyApp</ion-title>
+        <app-navbar *ngIf="isSidebarVisible"></app-navbar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding main">
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+  </div>
+</ion-app>

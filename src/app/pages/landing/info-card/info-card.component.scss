@@ -1,0 +1,14 @@
+ion-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: transform 0.5s, opacity 0.5s;
+  
+    &.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

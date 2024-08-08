@@ -1,0 +1,38 @@
+<ion-content  class="cards-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Cards</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="card-list">
+    <ion-card class="card-item" *ngFor="let card of cards">
+      <ion-card-header>
+        <ion-card-title>{{ card.number }}</ion-card-title>
+        <ion-card-subtitle>{{ card.expiry }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ card.holder }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+
+<ion-content class="transaction-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Transaction</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="transaction-list">
+    <ion-card class="transaction-item" *ngFor="let transaction of transactions">
+      <ion-card-header>
+        <ion-card-title>{{ transaction.name }}</ion-card-title>
+        <ion-card-subtitle>{{ transaction.date }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ transaction.amount }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

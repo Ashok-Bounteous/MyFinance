@@ -1,0 +1,178 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Task Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let task of tasks" (click)="editTask(task)">
+      <ion-label>
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+        <p>Priority: {{ task.priority }}</p>
+        <p>Deadline: {{ task.deadline | date }}</p>
+      </ion-label>
+      <ion-button (click)="deleteTask(task)" slot="end" color="danger">Delete</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button (click)="isOpen = true">Add Task</ion-button>
+
+  <ion-modal [isOpen]="isOpen" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ model.id ? 'Edit Task' : 'Add Task' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <form #form="ngForm" (ngSubmit)="save(form)">
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input type="text" name="title" [(ngModel)]="model.title" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-input type="text" name="description" [(ngModel)]="model.description" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Priority</ion-label>
+            <ion-select name="priority" [(ngModel)]="model.priority" required>
+              <ion-select-option value="low">Low</ion-select-option>
+              <ion-select-option value="medium">Medium</ion-select-option>
+              <ion-select-option value="high">High</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Deadline</ion-label>
+            <ion-datetime name="deadline" [(ngModel)]="model.deadline" required></ion-datetime>
+          </ion-item>
+
+          <ion-footer>
+            <ion-button expand="block" type="submit">{{ model.id ? 'Update Task' : 'Add Task' }}</ion-button>
+          </ion-footer>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content> -->
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Task Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="activeTab" (ionChange)="applyFilters()">
+    <ion-segment-button value="all">
+      All
+    </ion-segment-button>
+    <ion-segment-button value="pending">
+      Pending
+    </ion-segment-button>
+    <ion-segment-button value="completed">
+      Completed
+    </ion-segment-button>
+    <ion-segment-button value="overdue">
+      Overdue
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-item>
+    <ion-label>Sort By</ion-label>
+    <ion-select [(ngModel)]="sortField" (ionChange)="applyFilters()">
+      <ion-select-option value="deadline">Deadline</ion-select-option>
+      <ion-select-option value="priority">Priority</ion-select-option>
+    </ion-select>
+    <ion-button (click)="toggleSortDirection()">
+      {{ sortDirection === 'asc' ? 'Ascending' : 'Descending' }}
+    </ion-button>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let task of filteredTasks">
+      <ion-label>
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+        <p>Deadline: {{ task.deadline | date }}</p>
+        <p>Priority: {{ task.priority }}</p>
+        <p>Status: {{ task.completed ? 'Completed' : 'Pending' }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="editTask(task)" [disabled]="task.completed">Edit</ion-button>
+        <ion-button (click)="deleteTask(task)" [disabled]="task.completed">Delete</ion-button>
+        <ion-button (click)="completeTask(task)" [disabled]="task.completed">Complete</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="isOpen = true">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal [isOpen]="isOpen" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ model?.id ? 'Edit Task' : 'Add Task' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <form #taskForm="ngForm" (ngSubmit)="save(taskForm)">
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input type="text" name="title" [(ngModel)]="model.title" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea name="description" [(ngModel)]="model.description" required></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Deadline</ion-label>
+            <ion-datetime name="deadline" [(ngModel)]="model.deadline" required></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Priority</ion-label>
+            <ion-select name="priority" [(ngModel)]="model.priority">
+              <ion-select-option value="low">Low</ion-select-option>
+              <ion-select-option value="medium">Medium</ion-select-option>
+              <ion-select-option value="high">High</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number" name="amount" [(ngModel)]="model.amount"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">To</ion-label>
+            <ion-input type="text" name="to" [(ngModel)]="model.to"></ion-input>
+          </ion-item>
+          <ion-footer>
+            <ion-toolbar>
+              <ion-buttons slot="end">
+                <ion-button type="submit">Save</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-footer>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

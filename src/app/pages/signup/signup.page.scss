@@ -1,0 +1,62 @@
+.signup-content {
+    --background: linear-gradient(135deg, #e8aecb 0%, #bfe9ff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  ion-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0;
+    padding: 0;
+    background: transparent; /* Make the card background transparent */
+    --background: none; /* Ensure no additional background */
+  }
+  
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  ion-input {
+    margin-top: 20px;
+    --background: rgba(255, 255, 255, 0.2);
+    // --placeholder-color: rgba(255, 255, 255, 0.7);
+    --placeholder-color: var(--ion-color-primary);
+    --label-color: var(--ion-color-primary);
+    color: #ffffff;
+  }
+  
+  ion-button.rounded-outline {
+    --border-radius: 20px;
+    margin-top: 20px;
+  }
+  
+  p {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+  }
+  
+  a {
+    color: #ff6e7f;
+    text-decoration: none;
+  }
+  

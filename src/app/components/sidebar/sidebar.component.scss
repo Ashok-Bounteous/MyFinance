@@ -1,0 +1,23 @@
+.sidebar {
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        margin: 10px 0;
+        
+        a {
+          color: var(--ion-color-primary);
+          text-decoration: none;
+          display: block;
+          padding: 10px 15px;
+          border-radius: 5px;
+          
+          &:hover {
+            background-color: var(--ion-color-light);
+          }
+        }
+      }
+    }
+  }
+  

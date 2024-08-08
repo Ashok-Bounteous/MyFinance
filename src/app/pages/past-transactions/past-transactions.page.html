@@ -1,0 +1,127 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Past Transactions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Filters</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-select [(ngModel)]="selectedStatus" multiple="true" placeholder="Select Status">
+          <ion-select-option *ngFor="let status of statuses" [value]="status">{{ status }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Transaction Type</ion-label>
+        <ion-select [(ngModel)]="selectedTransactionTypes" multiple="true" placeholder="Select Transaction Type">
+          <ion-select-option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-range dualKnobs="true" [(ngModel)]="selectedDateRange" (ionChange)="filterTransactions()">
+          <ion-label slot="start">From</ion-label>
+          <ion-label slot="end">To</ion-label>
+        </ion-range>
+      </ion-item>
+      <ion-chip *ngFor="let chip of selectedChips" (click)="removeChip(chip)">
+        {{ chip }}
+        <ion-icon name="close-circle" (click)="removeChip(chip)"></ion-icon>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Transaction Chart</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas baseChart
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [colors]="chartColors"
+              [legend]="chartLegend"
+              [chartType]="chartType">
+      </canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let transaction of filteredTransactions">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ transaction.category }}</ion-card-title>
+            <ion-card-subtitle>{{ transaction.transactionDate | date }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ transaction.description }}</p>
+            <p><strong>Amount:</strong> {{ transaction.amount | currency }}</p>
+            <p><strong>Status:</strong> {{ transaction.status }}</p>
+            <p><strong>Tags:</strong> <ion-chip *ngFor="let tag of transaction.tags">{{ tag }}</ion-chip></p>
+            <ion-button color="danger" (click)="deleteTransaction(transaction.id)">Delete</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openTransactionForm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content> -->
+
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Past Transactions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Transactions</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let transaction of filteredTransactions">
+          <ion-label>
+            <h2>{{ transaction.category }}</h2>
+            <p>{{ transaction.description }}</p>
+            <p>{{ transaction.amount }}</p>
+            <p>{{ transaction.status }}</p>
+            <p>{{ transaction.transactionType }}</p>
+            <p>{{ transaction.transactionDate | date: 'shortDate' }}</p>
+          </ion-label>
+          <ion-button color="danger" (click)="deleteTransaction(transaction.id)">Delete</ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="openTransactionForm()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Transaction Chart</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="chartData">
+      <div style="position: relative; height:50vh; width:80vw">
+
+        <canvas id="transactionChart"></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

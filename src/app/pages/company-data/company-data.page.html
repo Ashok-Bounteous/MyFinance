@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Company Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Display the company data in a Swiper container -->
+  <div *ngIf="(companyData$ | async) as companyData">
+    <swiper-container [slidesPerView]="3" [loop]="true" [navigation]="true" [breakpoints]="SwiperParams.breakpoints" autoplay-delay="2000" class="swiper-container">
+      <swiper-slide *ngFor="let company of companyData">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ company.company }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <p>Initial Price: {{ company.initial_price }}</p>
+                </ion-col>
+                <ion-col>
+                  <p>Symbol: {{ company.symbol }}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <p>Price in 2002: {{ company.price_2002 }}</p>
+                </ion-col>
+                <ion-col>
+                  <p>Price in 2007: {{ company.price_2007 }}</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <!-- Input field for searching company -->
+  <ion-item>
+    <ion-input placeholder="Enter Company Symbol" [(ngModel)]="symbol"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="search(symbol)">Search</ion-button>
+
+  <!-- Interval selection chips -->
+  <div class="chips-container">
+    <ion-chip [color]="selectedInterval === 'daily' ? 'primary' : 'medium'" (click)="setInterval('daily')">
+      <ion-label>Daily</ion-label>
+    </ion-chip>
+    <ion-chip [color]="selectedInterval === 'weekly' ? 'primary' : 'medium'" (click)="setInterval('weekly')">
+      <ion-label>Weekly</ion-label>
+    </ion-chip>
+    <ion-chip [color]="selectedInterval === 'monthly' ? 'primary' : 'medium'" (click)="setInterval('monthly')">
+      <ion-label>Monthly</ion-label>
+      </ion-chip>
+  </div>
+
+  <!-- Display loading and error messages -->
+  <div *ngIf="loading$ | async" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading...</p>
+  </div>
+  <div *ngIf="error$ | async as error" class="error-container">
+    Error: {{ error }}
+  </div>
+
+  <!-- Display chart data if available -->
+  <div *ngIf="searchResult" class="chartdata">
+    <app-company-chart [companyData]="searchResult"></app-company-chart>
+  </div>
+</ion-content>

@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Transactions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <!-- Form fields for transaction details -->
+    <ion-item>
+      <ion-label position="floating">Transaction Type</ion-label>
+      <ion-select formControlName="transactionType">
+        <ion-select-option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Category</ion-label>
+      <ion-select formControlName="category">
+        <ion-select-option *ngFor="let category of getCategoryOptions()" [value]="category">{{ category }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Account</ion-label>
+      <ion-select formControlName="accountId">
+        <ion-select-option *ngFor="let account of bankAccounts" [value]="account.id">{{ account.accountNumber }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Transaction Date</ion-label>
+      <ion-datetime formControlName="transactionDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Amount</ion-label>
+      <ion-input type="number" formControlName="amount"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input formControlName="description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tags</ion-label>
+      <ion-input formControlName="tags"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Recurring</ion-label>
+      <ion-checkbox formControlName="recurring"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Status</ion-label>
+      <ion-select formControlName="status">
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Completed">Completed</ion-select-option>
+        <ion-select-option value="Failed">Failed</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!transactionForm.valid">Add Transaction</ion-button>
+  </form>
+
+  <ion-list>
+    <ion-item *ngFor="let transaction of transactions">
+      <ion-label>
+        <h2>{{ transaction.category }}</h2>
+        <p>{{ transaction.amount | currency }}</p>
+        <p>{{ transaction.transactionDate }}</p>
+        <p>{{ transaction.description }}</p>
+      </ion-label>
+      <ion-button color="danger" *ngIf="transaction.id" (click)="deleteTransaction(transaction.id)">Delete</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

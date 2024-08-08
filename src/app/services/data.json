@@ -1,0 +1,138 @@
+{
+    "users": {
+      "userlist": {
+        "PVgabLXQZfPxHRsiFdTlgnx2YWH2": {
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "createdAt": "2024-08-01T12:00:00Z"
+        },
+        "userId2": {
+          "name": "Jane Smith",
+          "email": "jane.smith@example.com",
+          "createdAt": "2024-08-01T13:00:00Z"
+        }
+      },
+      "tasks": {
+        "PVgabLXQZfPxHRsiFdTlgnx2YWH2": {
+          "usertasks": [
+            {
+              "title": "Task 1",
+              "description": "Description for task 1",
+              "amount": 100,
+              "to": "Person A",
+              "dates": {
+                "created": "2024-08-01T12:30:00Z",
+                "updated": ["2024-08-02T12:30:00Z"]
+              },
+              "priority": "medium",
+              "deadline": "2024-08-15T12:00:00Z",
+              "id": "taskId1"
+            },
+            {
+              "title": "Task 2",
+              "description": "Description for task 2",
+              "amount": 200,
+              "to": "Person B",
+              "dates": {
+                "created": "2024-08-02T12:30:00Z",
+                "updated": []
+              },
+              "priority": "high",
+              "deadline": "2024-08-20T12:00:00Z",
+              "id": "taskId2"
+            }
+          ]
+        },
+        "userId2": {
+          "usertasks": [
+            {
+              "title": "Task A",
+              "description": "Description for task A",
+              "amount": 300,
+              "to": "Person C",
+              "dates": {
+                "created": "2024-08-01T14:00:00Z",
+                "updated": ["2024-08-03T14:00:00Z"]
+              },
+              "priority": "low",
+              "deadline": "2024-08-10T12:00:00Z",
+              "id": "taskIdA"
+            }
+          ]
+        }
+      },
+      "profiles": {
+        "PVgabLXQZfPxHRsiFdTlgnx2YWH2": {
+          "profilePicture": "url-to-profile-picture",
+          "bio": "This is the bio for PVgabLXQZfPxHRsiFdTlgnx2YWH2",
+          "settings": {
+            "theme": "dark",
+            "notifications": true
+          }
+        },
+        "userId2": {
+          "profilePicture": "url-to-profile-picture",
+          "bio": "This is the bio for userId2",
+          "settings": {
+            "theme": "light",
+            "notifications": false
+          }
+        }
+      },
+      "transactionHistory": {
+        "PVgabLXQZfPxHRsiFdTlgnx2YWH2": [
+          {
+            "transactionId": "trans1",
+            "amount": 150,
+            "date": "2024-08-01T12:00:00Z",
+            "description": "Transaction description 1"
+          }
+        ],
+        "userId2": [
+          {
+            "transactionId": "trans2",
+            "amount": 250,
+            "date": "2024-08-02T14:00:00Z",
+            "description": "Transaction description 2"
+          }
+        ]
+      },
+      "bankHistory": {
+        "PVgabLXQZfPxHRsiFdTlgnx2YWH2": [
+          {
+            "bankId": "bank1",
+            "amount": 500,
+            "date": "2024-08-01T10:00:00Z",
+            "description": "Bank deposit 1"
+          }
+        ],
+        "userId2": [
+          {
+            "bankId": "bank2",
+            "amount": 1000,
+            "date": "2024-08-02T11:00:00Z",
+            "description": "Bank deposit 2"
+          }
+        ]
+      },
+      "budgetHistory": {
+        "PVgabLXQZfPxHRsiFdTlgnx2YWH2": [
+          {
+            "budgetId": "budget1",
+            "amount": 2000,
+            "date": "2024-08-01T09:00:00Z",
+            "description": "Monthly budget"
+          }
+        ],
+        "userId2": [
+          {
+            "budgetId": "budget2",
+            "amount": 3000,
+            "date": "2024-08-02T10:00:00Z",
+            "description": "Monthly budget"
+          }
+        ]
+      }
+    }
+  }
+  

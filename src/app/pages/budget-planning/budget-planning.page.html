@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Budget Planning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Budget Name</ion-label>
+      <ion-input formControlName="budgetName" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Amount</ion-label>
+      <ion-input formControlName="amount" type="number" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Start Date</ion-label>
+      <ion-datetime formControlName="startDate" display-format="MM/DD/YYYY" required></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">End Date</ion-label>
+      <ion-datetime formControlName="endDate" display-format="MM/DD/YYYY" required></ion-datetime>
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="!budgetForm.valid">Create Budget</ion-button>
+  </form>
+</ion-content>
