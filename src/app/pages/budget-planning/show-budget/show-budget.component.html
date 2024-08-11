@@ -1,0 +1,58 @@
+<div class="budget-container">
+  <!-- Flex Container for Selectors and Data -->
+  <div class="selectors-and-data">
+    <!-- Year Selection -->
+    <div class="year-selection">
+      <ion-item>
+        <ion-label>Select Year</ion-label>
+        <ion-select placeholder="Choose Year" [(ngModel)]="selectedYear" name="yearSelect" (ionChange)="onYearChange()">
+          <ion-select-option *ngFor="let year of availableYears" [value]="year">{{ year }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Month Selection -->
+    <div *ngIf="selectedYear" class="month-selection">
+      <ion-label>Select Month</ion-label>
+      <div class="chip-container">
+        <ion-chip *ngFor="let month of availableMonths" (click)="onMonthChange(month)" [color]="selectedMonth === month ? 'primary' : 'secondary'">
+          <ion-label>{{ month }}</ion-label>
+        </ion-chip>
+        <ion-chip (click)="onCumulativeChange()" [color]="!selectedMonth ? 'primary' : 'secondary'">
+          <ion-label>Cumulative</ion-label>
+        </ion-chip>
+      </div>
+    </div>
+
+    <!-- Budget Data Display -->
+    <div *ngIf="budgetData" class="budget-data">
+      <h2>Budget for {{ selectedMonth ? selectedMonth + ' ' + selectedYear : selectedYear }}</h2>
+
+      <!-- Flex Container for Table and Chart -->
+      <div class="data-container">
+        <!-- Budget Table -->
+        <div class="table-container">
+          <table class="budget-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of budgetData | keyvalue">
+                <td>{{ item.key }}</td>
+                <td>${{ item.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Budget Pie Chart -->
+        <div class="chart-container">
+          <p-chart type="pie" [data]="pieChartData"></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

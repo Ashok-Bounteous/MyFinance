@@ -1,0 +1,66 @@
+.budget-container {
+    padding: 16px;
+  
+    .selectors-and-data {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      
+      .year-selection {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .month-selection {
+        display: flex;
+        flex-direction: column;
+        
+        ion-label {
+          display: block;
+          margin-bottom: 8px;
+        }
+  
+        .chip-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+      }
+  
+      .budget-data {
+        margin-top: 16px;
+        
+        h2 {
+          margin-bottom: 16px;
+        }
+  
+        .data-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+          
+          .table-container {
+            flex: 1;
+            min-width: 300px; // Adjust this as needed
+          }
+  
+          .chart-container {
+            flex: 1;
+            min-width: 300px; // Adjust this as needed
+            max-width: 400px; // Optional: limit the maximum width
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .selectors-and-data {
+      flex-direction: column;
+  
+      .data-container {
+        flex-direction: column;
+      }
+    }
+  }
+  

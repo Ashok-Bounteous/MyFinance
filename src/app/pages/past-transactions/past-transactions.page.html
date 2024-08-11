@@ -1,93 +1,64 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Past Transactions</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-segment [(ngModel)]="segment">
-    <ion-segment-button value="table">
-      <ion-label>Table</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="chart">
-      <ion-label>Chart</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
-  <ion-item>
-    <ion-label>Status</ion-label>
-    <ion-select [(ngModel)]="selectedStatus" multiple="true">
-      <ion-select-option *ngFor="let status of statuses" [value]="status">{{ status }}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Type</ion-label>
-    <ion-select [(ngModel)]="selectedTransactionTypes" multiple="true">
-      <ion-select-option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Date Range</ion-label>
-    <ion-datetime [(ngModel)]="selectedDateRange.lower" placeholder="Start Date"></ion-datetime>
-    <ion-datetime [(ngModel)]="selectedDateRange.upper" placeholder="End Date"></ion-datetime>
-  </ion-item>
-
-  <ion-button expand="full" (click)="filterTransactions()">Apply Filters</ion-button>
-
-  <div [ngSwitch]="segment">
-    <div *ngSwitchCase="'table'">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Transactions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let transaction of filteredTransactions">
-              <ion-label>
-                <h2>{{ transaction.category }}</h2>
-                <p>{{ transaction.description }}</p>
-                <p>{{ transaction.amount }}</p>
-                <p>{{ transaction.status }}</p>
-                <p>{{ transaction.transactionType }}</p>
-                <p>{{ transaction.transactionDate | date: 'shortDate' }}</p>
-              </ion-label>
-              <ion-button color="danger" (click)="deleteTransaction(transaction.id)">Delete</ion-button>
-            </ion-item>
-          </ion-list>
-          <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-            <ion-fab-button (click)="openTransactionForm()">
-              <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
-        </ion-card-content>
-      </ion-card>
-    </div>
-    <div *ngSwitchCase="'chart'">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Transaction Chart</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="chartData">
-          <div style="position: relative; height:50vh; width:80vw">
-            <canvas id="transactionChart"></canvas>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
-</ion-content> -->
-
-
-
 <ion-header>
   <ion-toolbar>
     <ion-title>Past Transactions</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+        <p-accordion [activeIndex]="0">
+          <p-accordionTab header="Advanced Filters">
+        <div class="filter-section flex-container">
+          <div class="card flex-item">
+            <p-multiSelect 
+                [options]="statuses" 
+                [(ngModel)]="selectedStatus" 
+                [filter]="true" 
+                optionLabel="label" 
+                placeholder="Select Status"
+                display="chip">
+            </p-multiSelect>
+          </div>
+  
+          <div class="card flex-item">
+            <p-multiSelect 
+                [options]="transactionTypes" 
+                [(ngModel)]="selectedTransactionTypes" 
+                [filter]="true" 
+                optionLabel="label" 
+                placeholder="Select Type"
+                display="chip">
+            </p-multiSelect>
+          </div>
+  
+          <span class="flex-item">
+              <ion-label>Date Range</ion-label>
+              <p-calendar 
+                [(ngModel)]="selectedDateRange" 
+                selectionMode="range" 
+                dateFormat="dd/mm/yy" 
+                placeholder="Select Date Range">
+              </p-calendar>
+          </span>
+  
+          <span class="flex-item">
+            <ion-item>
+              <ion-label>Timeline</ion-label>
+              <ion-select [(ngModel)]="selectedTimeline">
+                <ion-select-option value="day">Day</ion-select-option>
+                <ion-select-option value="month">Month</ion-select-option>
+                <ion-select-option value="year">Year</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </span>
+  
+          <span class="flex-item full-width">
+            <ion-button expand="block" (click)="applyFilters()">Apply Filters</ion-button>
+          </span>
+        </div>
+        </p-accordionTab>
+        </p-accordion>
+
   <ion-segment [(ngModel)]="segment">
     <ion-segment-button value="table">
       <ion-label>Table</ion-label>
@@ -97,75 +68,63 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div class="filter-section card flex justify-content-center">
-    <p-dropdown [options]="statuses" [(ngModel)]="selectedStatus" placeholder="Select Status" [showClear]="true" multiple="true" (onChange)="applyFilters()"></p-dropdown>
-    <p-dropdown [options]="transactionTypes" [(ngModel)]="selectedTransactionTypes" placeholder="Select Transaction Types" [showClear]="true" multiple="true" (onChange)="applyFilters()"></p-dropdown>
-    <p-calendar [(ngModel)]="selectedDateRange.lower" placeholder="Start Date" dateFormat="dd.mm.yy" (onChange)="applyFilters()"></p-calendar>
-    <p-calendar [(ngModel)]="selectedDateRange.upper" placeholder="End Date" dateFormat="dd.mm.yy" (onChange)="applyFilters()"></p-calendar>
-    <div class="filter-chips">
-      <div *ngFor="let filter of selectedFilters" class="chip">{{ filter }}</div>
-    </div>
-  </div>
 
-  <div [ngSwitch]="segment">
-    <div *ngSwitchCase="'table'">
-      <div class="card flex justify-content-center">
-        <p-card header="Transactions" [style]="{ width: '100%' }">
-          <ng-template pTemplate="content">
-            <p-table [value]="filteredTransactions">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Type</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-transaction>
-                <tr>
-                  <td>{{ transaction.category }}</td>
-                  <td>{{ transaction.description }}</td>
-                  <td>{{ transaction.amount | currency }}</td>
-                  <td>{{ transaction.status }}</td>
-                  <td>{{ transaction.transactionType }}</td>
-                  <td>{{ transaction.transactionDate | date: 'shortDate' }}</td>
-                  <td>
-                    <ion-button color="danger" (click)="deleteTransaction(transaction.id)">Delete</ion-button>
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </ng-template>
-        </p-card>
-      </div>
-    </div>
-    <div *ngSwitchCase="'chart'">
-      <div class="card flex justify-content-center">
-        <p-card header="Transaction Chart" [style]="{ width: '100%' }">
-          <ng-template pTemplate="content">
-            <div style="position: relative; height:50vh; width:80vw">
-              <canvas id="transactionBarChart"></canvas>
-              <canvas id="transactionPieChart"></canvas>
-            </div>
-          </ng-template>
-        </p-card>
-      </div>
-      <div class="timeline-selection">
-        <ion-segment [(ngModel)]="selectedTimeline" (ionChange)="updateChart()">
-          <ion-segment-button value="month">
-            <ion-label>Month</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="year">
-            <ion-label>Year</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="range">
-            <ion-label>Range</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </div>
-    </div>
+  <ion-list>
+    <ion-item *ngFor="let filter of selectedFilters">{{filter}}</ion-item>
+  </ion-list>
+
+  <div *ngIf="segment === 'table'">
+    <p-table [value]="filteredTransactions" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [responsiveLayout]="'scroll'">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="transactionDate">Date <p-sortIcon field="transactionDate"></p-sortIcon></th>
+          <th pSortableColumn="transactionType">Type <p-sortIcon field="transactionType"></p-sortIcon></th>
+          <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+          <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-transaction>
+        <tr>
+          <td>{{ transaction.transactionDate | date:'shortDate' }}</td>
+          <td>{{ transaction.transactionType }}</td>
+          <td>{{ transaction.amount | currency }}</td>
+          <td>{{ transaction.status }}</td>
+          <td>
+            <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info">.</button>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger">.</button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">No transactions found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+
+  <div *ngIf="segment === 'chart'" class="chart-grid">
+    <!-- <canvas id="transactionBarChart"></canvas>
+    <canvas id="transactionPieChart"></canvas> -->
+    <!-- <ion-content>
+      <div *ngIf="segment === 'chart'" class="chart-grid"> -->
+        <div class="chart-container">
+          <canvas id="transactionBarChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="transactionPieChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="transactionDoughnutChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <canvas id="transactionRadarChart"></canvas>
+        </div>
+      <!-- </div>
+    </ion-content> -->
+    
+    
   </div>
 </ion-content>

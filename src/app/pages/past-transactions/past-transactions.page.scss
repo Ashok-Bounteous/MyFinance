@@ -1,74 +1,138 @@
-.filter-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 10px;
-  }
+// .filter-section {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 10px;
+//     margin: 10px;
+//   }
 
-  .chartData {
-    display: flex;
-    justify-content: center;
-    align-items: top;
-    margin-top: 20px;
-    width: 100vw;
-  }
+//   .chartData {
+//     display: flex;
+//     justify-content: center;
+//     align-items: top;
+//     margin-top: 20px;
+//     width: 100vw;
+//   }
 
-  .filter-section {
+//   .filter-section {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 10px;
+//   }
+  
+//   .filter-chips {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 5px;
+//   }
+  
+//   .chip {
+//     background-color: #e0e0e0;
+//     border-radius: 16px;
+//     padding: 5px 10px;
+//     font-size: 14px;
+//   }
+  
+//   .card {
+//     padding: 16px;
+//     border-radius: 8px;
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   }
+  
+//   .timeline-selection {
+//     margin: 10px;
+//   }
+  
+//   @media (max-width: 768px) {
+//     .filter-section {
+//       flex-direction: column;
+//       align-items: flex-start;
+//     }
+//   }
+
+  
+//   .filter-chips {
+//     display: flex;
+//     flex-wrap: wrap;
+//     margin: 10px 0;
+  
+//     .chip {
+//       background: #007bff;
+//       color: white;
+//       padding: 5px 10px;
+//       border-radius: 16px;
+//       margin: 5px;
+//       display: flex;
+//       align-items: center;
+  
+//       ion-icon {
+//         margin-left: 8px;
+//         cursor: pointer;
+//       }
+//     }
+//   }
+  
+  // p-multiSelect{
+  //   min-height: 200px;
+  // }
+
+.filter-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .filter-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-  
-  .chip {
-    background-color: #e0e0e0;
-    border-radius: 16px;
-    padding: 5px 10px;
-    font-size: 14px;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
   
   .card {
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
   }
   
-  .timeline-selection {
-    margin: 10px;
-  }
+  // .chart-container {
+  //   position: relative;
+  //   height: 300px;
+  //   width: 100%;
+  // }
   
-  @media (max-width: 768px) {
-    .filter-section {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  // @media (max-width: 768px) {
+  //   .chart-container {
+  //     height: 200px;
+  //   }
+  // }
+  
+  p-chip {
+    background-color: #007bff;
+    color: white;
+    border-radius: 16px;
+    padding: 0.5rem 1rem;
   }
 
-  
-  .filter-chips {
+  .flex-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px 0;
-  
-    .chip {
-      background: #007bff;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 16px;
-      margin: 5px;
-      display: flex;
-      align-items: center;
-  
-      ion-icon {
-        margin-left: 8px;
-        cursor: pointer;
-      }
-    }
+    gap: 10px; /* Space between the items */
   }
   
+  .flex-item {
+    flex: 1 1 200px; /* Grow, shrink, and set a minimum width */
+    min-width: 200px; /* Ensure a minimum width */
+  }
+  
+  .full-width {
+    flex: 1 0 100%; /* Make this item full width */
+  }
+  
+  // p-calendar{
+  //   z-index: 200 !important;
+  // }
+
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  
+  .chart-container {
+    width: 100%;
+    height: 300px;
+  }
   

@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label>Budget Amount</ion-label>
+    <ion-input [(ngModel)]="budgetAmount" name="budgetAmount" type="number" placeholder="Enter Total Budget"></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let category of budgetCategories; let i = index">
+      <ion-label>{{ category.name }}</ion-label>
+      <ion-input [(ngModel)]="category.amount" name="category{{i}}" type="number" (ionInput)="onCategoryChange()" placeholder="Enter Amount"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <canvas id="newBudgetChart"></canvas>
+
+  <ion-button expand="full" type="submit">Save Budget</ion-button>
+</form>

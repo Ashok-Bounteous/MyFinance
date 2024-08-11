@@ -4,7 +4,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
-
+import { ChipModule } from 'primeng/chip';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AccordionModule } from 'primeng/accordion';
+import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [],
@@ -14,6 +19,12 @@ import { CardModule } from 'primeng/card';
     CalendarModule,
     TableModule,
     CardModule,
+    ChipModule,
+    AutoCompleteModule,
+    MultiSelectModule,
+    AccordionModule,
+    ButtonModule,
+    ChartModule
   ],
   exports: [
     CommonModule,
@@ -21,6 +32,12 @@ import { CardModule } from 'primeng/card';
     CalendarModule,
     TableModule,
     CardModule,
+    ChipModule,
+    AutoCompleteModule,
+    MultiSelectModule,
+    AccordionModule,
+    ButtonModule,
+    ChartModule
   ]
 })
 export class SharedModule { }
