@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editProfile()">Edit</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Profile Details</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Name</ion-label>
+          <ion-input [(ngModel)]="profile.name" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Age</ion-label>
+          <ion-input [(ngModel)]="profile.age" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Date of Birth</ion-label>
+          <ion-input [(ngModel)]="profile.dob" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Address</ion-label>
+          <ion-input [(ngModel)]="profile.address" readonly></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Bank Accounts</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let account of profile.bankAccounts">
+              <ion-label>{{ account.name }}</ion-label>
+              <ion-note slot="end">{{ account.balance | currency }}</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Total Balance</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>{{ totalBalance | currency }}</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
