@@ -1,29 +1,3 @@
-<!-- <ion-content fullscreen="true" class="signup-content">
-  <div class="card-container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title color="primary"><strong>SignUp</strong></ion-card-title>
-        <ion-card-subtitle color="primary">Enter the registration details below</ion-card-subtitle>
-      </ion-card-header>
-      <div class="container">
-        <div class="form-container">
-          <ion-input label="Email" labelPlacement="floating" fill="outline" placeholder="Email" type="email"></ion-input>
-          <ion-input     
-          labelPlacement="floating"          label="Password"
-          fill="outline" placeholder="Password" [(ngModel)]="password" type="password"></ion-input>
-          <ion-input labelPlacement="floating"          label="Password"
-          fill="outline" placeholder="Confirm Password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" type="password"></ion-input>
-          <ion-button expand="block" class="rounded-outline" (click)="signup()">Sign Up</ion-button>
-          <p>
-            Already have an account? <a routerLink="/login">Login</a>
-          </p>
-        </div>
-      </div>
-    </ion-card>
-  </div>
-</ion-content> -->
-
-
 <ion-content fullscreen="true" class="signup-content">
   <div class="card-container">
     <ion-card>
@@ -68,3 +42,115 @@
     </ion-card>
   </div>
 </ion-content>
+
+
+<!-- <div class="card">
+  <p-stepper [linear]="true">
+    <p-stepperPanel header="Step 1: Registration">
+      <ng-template pTemplate="content" let-nextCallback="nextCallback">
+        <div class="flex flex-column h-12rem">
+          <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+            <form [formGroup]="signupForm" (ngSubmit)="register(nextCallback.emit())">
+              <ion-input
+                formControlName="email"
+                label="Email"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Email"
+                type="email"
+              ></ion-input>
+              <ion-input
+                formControlName="password"
+                label="Password"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Password"
+                type="password"
+              ></ion-input>
+              <ion-input
+                formControlName="confirmPassword"
+                label="Confirm Password"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Confirm Password"
+                type="password"
+              ></ion-input>
+              <p-button label="Submit" icon="pi pi-arrow-right" iconPos="right" type="submit" [disabled]="signupForm.invalid" />
+            </form>
+          </div>
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel header="Step 2: Profile Details">
+      <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback">
+        <div class="flex flex-column h-12rem">
+          <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+            <form [formGroup]="profileForm" (ngSubmit)="getProfileDetails(nextCallback)">
+              <ion-input
+                formControlName="name"
+                label="Name"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Name"
+                type="text"
+              ></ion-input>
+              <ion-input
+                formControlName="phone"
+                label="Phone"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Phone"
+                type="tel"
+              ></ion-input>
+              <ion-input
+                formControlName="address"
+                label="Address"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Address"
+                type="text"
+              ></ion-input>
+              <div class="flex pt-4 justify-content-between">
+                <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
+                <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" type="submit" [disabled]="profileForm.invalid" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+
+    <p-stepperPanel header="Step 3: Add Bank Account">
+      <ng-template pTemplate="content" let-prevCallback="prevCallback">
+        <div class="flex flex-column h-12rem">
+          <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+            Bank account form goes here
+            <form (ngSubmit)="addBankAccount()">
+              <ion-input
+                formControlName="accountNumber"
+                label="Account Number"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Account Number"
+                type="text"
+              ></ion-input>
+              <ion-input
+                formControlName="bankName"
+                label="Bank Name"
+                labelPlacement="floating"
+                fill="outline"
+                placeholder="Bank Name"
+                type="text"
+              ></ion-input>
+              <p-button label="Submit" icon="pi pi-check" iconPos="right" type="submit" [disabled]="bankAccountForm.invalid" />
+            </form>
+          </div>
+        </div>
+        <div class="flex pt-4 justify-content-start">
+          <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</div> -->

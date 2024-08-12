@@ -9,6 +9,7 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 import { SignupPage } from './signup.page';
 
 import { Chart } from 'chart.js';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { Chart } from 'chart.js';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    SignupPageRoutingModule
+    SignupPageRoutingModule,
+    SharedModule
   ],
   declarations: [SignupPage]
 })

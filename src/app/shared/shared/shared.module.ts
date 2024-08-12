@@ -10,7 +10,12 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
-
+import { StyleClassModule } from 'primeng/styleclass';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { MenuModule } from 'primeng/menu';
+import { StepperModule } from 'primeng/stepper';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   declarations: [],
   imports: [
@@ -24,7 +29,13 @@ import { ChartModule } from 'primeng/chart';
     MultiSelectModule,
     AccordionModule,
     ButtonModule,
-    ChartModule
+    ChartModule,
+    StyleClassModule,
+    PanelMenuModule,
+    MenuModule,
+    StepperModule,
+    InputNumberModule,
+    ProgressSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -37,7 +48,13 @@ import { ChartModule } from 'primeng/chart';
     MultiSelectModule,
     AccordionModule,
     ButtonModule,
-    ChartModule
+    ChartModule,
+    StyleClassModule,
+    PanelMenuModule,
+    MenuModule,
+    StepperModule,
+    InputNumberModule,
+    ProgressSpinnerModule
   ]
 })
 export class SharedModule { }

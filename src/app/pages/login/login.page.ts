@@ -1,105 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Store } from '@ngrx/store';
-// import { Observable } from 'rxjs';
-// import { Router } from '@angular/router';
-// import { ToastController } from '@ionic/angular';
-// import { LoginState } from 'src/app/store/models/LoginState';
-// import { login, recoverEmailPassword } from '../../store/actions/auth.actions';
-// import { show, hide } from '../../store/actions/loading.actions';
-// import { selectAuthError, selectIsLoggedIn, selectIsLoggingIn } from '../../store/selectors/auth.selectors';
-// import { selectIsLoading } from '../../store/selectors/loading.selectors';
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.page.html',
-//   styleUrls: ['./login.page.scss'],
-// })
-// export class LoginPage implements OnInit {
-//   loginForm: FormGroup;
-//   errorMessage$: Observable<string>;
-//   isLoggedIn$: Observable<boolean>;
-//   isLoggingIn$: Observable<boolean>;
-//   isLoading$: Observable<boolean>;
-
-//   constructor(
-//     private fb: FormBuilder,
-//     private store: Store<{ auth: LoginState }>,
-//     private router: Router,
-//     private toastController: ToastController
-//   ) {
-//     this.loginForm = this.fb.group({
-//       email: ['', [Validators.required, Validators.email]],
-//       password: ['', [Validators.required, Validators.minLength(6)]],
-//     });
-
-//     this.errorMessage$ = this.store.select(selectAuthError);
-//     this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
-//     this.isLoggingIn$ = this.store.select(selectIsLoggingIn);
-//     this.isLoading$ = this.store.select(selectIsLoading);
-//   }
-
-//   ngOnInit() {
-//     this.errorMessage$.subscribe((error) => {
-//       if (error) {
-//         console.log("Error: ", error);
-//         this.presentToast(error, 'danger');
-//         this.store.dispatch(hide());
-//       }
-//     });
-
-//     this.isLoggedIn$.subscribe((isLoggedIn) => {
-//       if (isLoggedIn) {
-//         console.log("Login successful");
-//         this.presentToast('Login successful', 'success');
-//         setTimeout(() => {
-//           this.router.navigate(['/company-data']); // navigate to the desired page
-//           this.store.dispatch(hide());
-//         }, 3000); // stop spinner after 3 seconds
-//       }
-//     });
-
-//     this.isLoggingIn$.subscribe((isLoggingIn) => {
-//       if (isLoggingIn) {
-//         this.store.dispatch(show());
-//       }
-//     });
-//   }
-
-//   onSubmit() {
-//     if (this.loginForm.valid) {
-//       const { email, password } = this.loginForm.value;
-//       this.store.dispatch(login({ email, password }));
-//     } else {
-//       this.presentToast('Please enter valid login details', 'warning');
-//     }
-//   }
-
-//   recoverPassword() {
-//     const email = this.loginForm.get('email')?.value;
-//     if (email) {
-//       this.store.dispatch(show());
-//       this.store.dispatch(recoverEmailPassword({ email }));
-//       this.presentToast('Password recovery email sent', 'info');
-//     } else {
-//       this.presentToast('Please enter a valid email', 'warning');
-//     }
-//   }
-
-//   async presentToast(message: string, color: string) {
-//     const toast = await this.toastController.create({
-//       message,
-//       color,
-//       duration: 2000,
-//     });
-//     toast.present();
-//   }
-// }
-
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -160,7 +58,7 @@ export class LoginPage implements OnInit {
 
       if (user) {
         await this.showToast('Login successful!');
-        this.router.navigateByUrl('/home', { replaceUrl: true });
+        this.router.navigateByUrl('/dashboard', { replaceUrl: true });
       } else {
         this.showAlert('Login failed', 'Please try again!');
       }

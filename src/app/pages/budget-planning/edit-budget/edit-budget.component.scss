@@ -1,28 +1,62 @@
 .budget-form {
-    padding: 16px;
-    
-    .chart-table-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px; // Adjust gap as needed
-      
-      .chart-container {
-        flex: 1;
-        min-width: 300px; // Ensure chart has a minimum width on small screens
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .form-col {
+      flex: 1;
+      margin: 0 10px;
+      min-width: 200px; // Adjust as needed
+
+      p-dropdown {
+        width: 100%;
       }
-  
-      .table-container {
-        flex: 1;
-        min-width: 300px; // Ensure table has a minimum width on small screens
-      }
-    }
-  
-    ion-item {
-      margin-bottom: 16px;
-    }
-  
-    ion-grid {
-      width: 100%;
     }
   }
-  
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .chart-table-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Adjust the gap between the chart and table
+
+    .chart-container,
+    .table-container {
+      width: 100%; // Ensure the containers take full width
+    }
+
+    // Styles for large screens
+    @media (min-width: 768px) {
+      flex-direction: row; // Switch to row direction on larger screens
+
+      .chart-container,
+      .table-container {
+        flex: 1; // Ensure both containers take equal width
+      }
+    }
+  }
+
+  .p-button-full {
+    width: 100%; // Make the button full width
+  }
+
+  .loading-spinner {
+    margin-top: 20px; // Adjust spacing if needed
+  }
+}

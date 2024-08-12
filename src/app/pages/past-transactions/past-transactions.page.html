@@ -60,10 +60,10 @@
         </p-accordion>
 
   <ion-segment [(ngModel)]="segment">
-    <ion-segment-button value="table">
+    <ion-segment-button value="table" (click)=" applyFilters()">
       <ion-label>Table</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="chart">
+    <ion-segment-button value="chart" (click)=" applyFilters()">
       <ion-label>Chart</ion-label>
     </ion-segment-button>
   </ion-segment>

@@ -73,6 +73,7 @@
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 export interface User {
   email: string;
@@ -83,7 +84,7 @@ export interface User {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private db: AngularFireDatabase) {}
 
   async register({ email, password }: User) {
     try {
@@ -113,5 +114,27 @@ export class AuthService {
         subscriber.next(user);
       });
     });
+  }
+
+  // getUserProfile(): Observable<any> {
+  //   return new Observable((subscriber) => {
+  //     onAuthStateChanged(this.auth, (user) => {
+  //       if (user) {
+  //         this.db.object(`users/profiles/${user.uid}`).valueChanges().subscribe(profile => {
+  //           subscriber.next(profile);
+  //         });
+  //       } else {
+  //         subscriber.next(null);
+  //       }
+  //     });
+  //   });
+  // }
+
+  async storeUserProfile(uid: string, profileData: any) {
+    try {
+      await this.db.object(`users/profiles/${uid}`).set(profileData);
+    } catch (e) {
+      console.error('Error storing profile data:', e);
+    }
   }
 }

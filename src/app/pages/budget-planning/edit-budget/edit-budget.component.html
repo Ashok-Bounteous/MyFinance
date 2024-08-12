@@ -1,109 +1,87 @@
-<!-- <form (ngSubmit)="onSubmit()">
-  <ion-item>
-    <ion-label>Budget Amount</ion-label>
-    <ion-input [(ngModel)]="budgetAmount" name="budgetAmount" type="number" placeholder="Enter Total Budget"></ion-input>
-  </ion-item>
-
-  <ion-list>
-    <ion-item *ngFor="let category of budgetCategories; let i = index">
-      <ion-label>{{ category.name }}</ion-label>
-      <ion-input [(ngModel)]="category.amount" name="category{{i}}" type="number" (ionInput)="onCategoryChange()" placeholder="Enter Amount"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <canvas id="editBudgetChart"></canvas>
-
-  <ion-button expand="full" type="submit">Update Budget</ion-button>
-</form> -->
-
-
-
-
-
-<!-- <form (ngSubmit)="onSubmit()">
-  <ion-item>
-    <ion-label>Select Year</ion-label>
-    <ion-select placeholder="Choose Year" [(ngModel)]="selectedYear" (ionChange)="onPeriodChange()">
-      <ion-select-option *ngFor="let year of availableYears" [value]="year">{{ year }}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item *ngIf="selectedYear">
-    <ion-label>Select Month</ion-label>
-    <ion-select placeholder="Choose Month" [(ngModel)]="selectedMonth" (ionChange)="onPeriodChange()">
-      <ion-select-option *ngFor="let month of availableMonths" [value]="month">{{ month }}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Budget Amount</ion-label>
-    <ion-input [(ngModel)]="budgetAmount" name="budgetAmount" type="number" placeholder="Enter Total Budget"></ion-input>
-  </ion-item>
-
-  <ion-list>
-    <ion-item *ngFor="let category of budgetCategories; let i = index">
-      <ion-label>{{ category.name }}</ion-label>
-      <ion-input [(ngModel)]="category.amount" name="category{{i}}" type="number" (ionInput)="onCategoryChange()" placeholder="Enter Amount"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <canvas id="editBudgetChart"></canvas>
-
-  <ion-button expand="full" type="submit">Update Budget</ion-button>
-
-</form> -->
-  <!-- <p-toast></p-toast> PrimeNG Toast for displaying messages -->
-
-
-
-  <form (ngSubmit)="onSubmit()" class="budget-form">
-    <!-- Year Selection -->
-    <ion-item>
-      <ion-label>Select Year</ion-label>
-      <ion-select placeholder="Choose Year" [(ngModel)]="selectedYear" name="yearSelect" (ionChange)="onPeriodChange()">
-        <ion-select-option *ngFor="let year of availableYears" [value]="year">{{ year }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  
-    <!-- Month Selection -->
-    <ion-item *ngIf="selectedYear">
-      <ion-label>Select Month</ion-label>
-      <ion-select placeholder="Choose Month" [(ngModel)]="selectedMonth" name="monthSelect" (ionChange)="onPeriodChange()">
-        <ion-select-option *ngFor="let month of availableMonths" [value]="month">{{ month }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  
-    <!-- Budget Amount Input -->
-    <ion-item>
-      <ion-label>Budget Amount</ion-label>
-      <ion-input [(ngModel)]="budgetAmount" name="budgetAmount" type="number" placeholder="Enter Total Budget" min="0"></ion-input>
-    </ion-item>
-  
-    <!-- Container for Chart and Table -->
-    <div class="chart-table-container">
-      <!-- Budget Chart -->
-      <div class="chart-container">
-        <canvas id="editBudgetChart" width="400" height="400"></canvas>
-      </div>
-  
-      <!-- Budget Categories Table -->
-      <div class="table-container">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="4"><strong>Category</strong></ion-col>
-            <ion-col size="8"><strong>Amount</strong></ion-col>
-          </ion-row>
-          <ion-row *ngFor="let category of budgetCategories; let i = index">
-            <ion-col size="4">{{ category.name }}</ion-col>
-            <ion-col size="8">
-              <ion-input [(ngModel)]="category.amount" name="category{{i}}" type="number" (ionInput)="onCategoryChange()" placeholder="Enter Amount" min="0"></ion-input>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
+<form (ngSubmit)="onSubmit()" class="budget-form">
+  <!-- Year and Month Selection -->
+  <div class="form-row">
+    <div class="form-col">
+      Select Year 
+      <p-dropdown 
+        [options]="availableYears" 
+        [(ngModel)]="selectedYear" 
+        name="yearSelect" 
+        placeholder="Choose Year" 
+        (onChange)="onPeriodChange()">
+      </p-dropdown>
     </div>
-  
-    <!-- Submit Button -->
-    <ion-button expand="full" type="submit">Update Budget</ion-button>
-  </form>
-  
+    <div class="form-col">
+      Select Month 
+      <p-dropdown 
+        [options]="availableMonths" 
+        [(ngModel)]="selectedMonth" 
+        name="monthSelect" 
+        placeholder="Choose Month" 
+        (onChange)="onPeriodChange()">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <!-- Budget Amount Input -->
+  <div class="form-group">
+    <label>Budget Amount</label>
+    <input pInputText 
+           type="number" 
+           [(ngModel)]="budgetAmount" 
+           name="budgetAmount" 
+           placeholder="Enter Total Budget" 
+           min="0">
+  </div>
+
+  <!-- Display Budget Amount -->
+  <div class="form-group">
+    <label>Total Budget:</label>
+    <p>{{ budgetAmount | currency:'INR':'symbol':'1.0-0' }}</p>
+  </div>
+
+  <!-- Container for Chart and Table -->
+  <div class="chart-table-container">
+    <!-- Budget Chart -->
+    <div class="chart-container">
+      <p-chart 
+        type="doughnut" 
+        [data]="chartData" 
+        [options]="chartOptions"
+        height="400"
+        width="400">
+      </p-chart>
+    </div>
+
+    <!-- Budget Categories Table -->
+    <div class="table-container">
+      <p-table [value]="budgetCategories" editable="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Category</th>
+            <th>Amount</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category let-i="rowIndex">
+          <tr lines="none">
+            <td>{{ category.name }}</td>
+            <td>
+              <p-inputNumber 
+                [(ngModel)]="category.amount" 
+                name="categoryAmount{{i}}" 
+                (onValueChange)="onCategoryChange()" 
+                [min]="0">
+              </p-inputNumber>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <button pButton type="submit" label="Update Budget" class="p-button-full"></button>
+
+  <!-- Loading State -->
+  <!-- <p-progressSpinner *ngIf="loading" styleClass="loading-spinner" strokeWidth="5"></p-progressSpinner> -->
+</form>

@@ -73,6 +73,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/past-transactions/past-transactions.module').then( m => m.PastTransactionsPageModule)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
     path: '**',
     redirectTo: 'landing',
   },

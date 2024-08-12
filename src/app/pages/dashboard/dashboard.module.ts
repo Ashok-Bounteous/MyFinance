@@ -14,6 +14,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { LoadingModule } from 'src/app/components/loading/loading.module';
 import { AppStoreModule } from 'src/app/store/app-store.module';
 import { environment } from 'src/environments/environment';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { environment } from 'src/environments/environment';
     HttpClientModule, 
     ReactiveFormsModule, 
     FormsModule,
-    LoadingModule
+    LoadingModule,
+    SharedModule
   ],
   declarations: [DashboardPage]
 })
