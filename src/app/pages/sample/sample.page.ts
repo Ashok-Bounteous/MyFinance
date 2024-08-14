@@ -19,7 +19,7 @@ export class SamplePage implements OnInit{
     Chart.register(...registerables);}
 
   ngOnInit() {
-    this._commonService.showData().subscribe(res => {
+    const res = this._commonService.showData();
       console.log(res)
 
       this.data = res;
@@ -32,7 +32,7 @@ export class SamplePage implements OnInit{
           this.databorder.push(this.data[i].bordercolor);
         }
       }
-    });
+    
     this.showChartData(this.datayear, this.dataamount, this.datacolor, this.databorder, 'barchart', 'bar');    
     this.showChartData(this.datayear, this.dataamount, this.datacolor, this.databorder, 'piechart', 'pie');
     this.showLine();
