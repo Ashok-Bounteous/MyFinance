@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-toggle>
@@ -7,7 +7,7 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>MyApp</ion-title>
+    <ion-title>MyFinance</ion-title>
     <ion-list>
       <ion-item button routerLink="/landing">Landing</ion-item>
       <ion-item button routerLink="/signup">Signup</ion-item>
@@ -18,4 +18,71 @@
       <ion-item button (click)="onLogout()">Logout</ion-item>
     </ion-list>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+
+
+<ion-toolbar>
+  <!-- Title with Icon -->
+  <ion-title>
+    <ion-icon name="cash-outline" slot="start" style="margin-right: 8px;"></ion-icon>
+    MyFinance
+  </ion-title>
+  <ion-button (click)="onLogout()" fill="outline" shape="round" slot="primary">
+    <ion-icon name="log-out" slot="start"></ion-icon>
+      <!-- <a href="#" class="menu-link">Logout</a> -->
+       Logout
+      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-button>
+</ion-toolbar>
+<ion-toolbar>
+
+  <!-- Buttons -->
+  <ion-buttons slot="start">
+    <ion-button routerLink="/landing">
+      <ion-icon name="home" slot="start"></ion-icon>
+      Landing
+    </ion-button>
+    <!-- <ion-button routerLink="/signup">
+      <ion-icon name="person-add" slot="start"></ion-icon>
+      Signup
+    </ion-button>
+    <ion-button routerLink="/login">
+      <ion-icon name="log-in" slot="start"></ion-icon>
+      Login
+    </ion-button> -->
+    <ion-button routerLink="/dashboard">
+      <ion-icon name="speedometer" slot="start"></ion-icon>
+      Dashboard
+    </ion-button>
+    <ion-button routerLink="/company-data">
+      <ion-icon name="stats-chart" slot="start"></ion-icon>
+      Company Data
+    </ion-button>
+    <ion-button routerLink="/bank-details">
+      <ion-icon name="card" slot="start"></ion-icon>
+      Bank Details
+    </ion-button>
+    <ion-button routerLink="/profile">
+      <ion-icon name="person-circle" slot="start"></ion-icon>
+      Profile
+    </ion-button>
+    <ion-button routerLink="/add-bank-account">
+      <ion-icon name="add-circle" slot="start"></ion-icon>
+      Add Bank Account
+    </ion-button>
+    <ion-button routerLink="/budget-planning">
+      <ion-icon name="calculator" slot="start"></ion-icon>
+      Budget Planning
+    </ion-button>
+    <!-- <ion-button routerLink="/sample">
+      <ion-icon name="flask" slot="start"></ion-icon>
+      Sample
+    </ion-button>
+    <ion-button routerLink="/sample2">
+      <ion-icon name="flask" slot="start"></ion-icon>
+      Sample2
+    </ion-button> -->
+
+  </ion-buttons>
+</ion-toolbar>

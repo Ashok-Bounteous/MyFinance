@@ -1,4 +1,4 @@
-<ion-app>
+<!-- <ion-app>
   <ion-menu type="push" menuId="myMenu" content-id="main-content">
     <ion-content class="ion-padding">
       <ion-menu-toggle>
@@ -52,7 +52,7 @@
             </ion-button>
           </ion-menu-toggle>
         </ion-buttons>
-        <ion-title *ngIf="!isSidebarVisible">MyApp</ion-title>
+        <ion-title *ngIf="!isSidebarVisible">MyFinance</ion-title>
         <app-navbar *ngIf="isSidebarVisible"></app-navbar>
       </ion-toolbar>
     </ion-header>
@@ -60,4 +60,99 @@
       <ion-router-outlet></ion-router-outlet>
     </ion-content>
   </div>
+</ion-app> -->
+
+
+
+
+<ion-app>
+  <ion-split-pane contentId="main-content" when="760px">
+    <!-- Sidebar -->
+    <ion-menu type="push" menuId="myMenu" content-id="main-content">
+      <ion-content class="ion-padding">
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon name="home" slot="start"></ion-icon>
+            <a routerLink="/landing" class="menu-link">Landing</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="person-add" slot="start"></ion-icon>
+            <a routerLink="/signup" class="menu-link">Signup</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="log-in" slot="start"></ion-icon>
+            <a routerLink="/login" class="menu-link">Login</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="speedometer" slot="start"></ion-icon>
+            <a routerLink="/dashboard" class="menu-link">Dashboard</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="stats-chart" slot="start"></ion-icon>
+            <a routerLink="/company-data" class="menu-link">Company Data</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="card" slot="start"></ion-icon>
+            <a routerLink="/bank-details" class="menu-link">Bank Details</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="person-circle" slot="start"></ion-icon>
+            <a routerLink="/profile" class="menu-link">Profile</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="add-circle" slot="start"></ion-icon>
+            <a routerLink="/add-bank-account" class="menu-link">Add Bank Account</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="calculator" slot="start"></ion-icon>
+            <a routerLink="/budget-planning" class="menu-link">Budget Planning</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="flask" slot="start"></ion-icon>
+            <a routerLink="/sample" class="menu-link">Sample</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="flask" slot="start"></ion-icon>
+            <a routerLink="/sample2" class="menu-link">Sample2</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+          <ion-item *ngIf="isAuthenticated" (click)="onLogout()">
+            <ion-icon name="log-out" slot="start"></ion-icon>
+            <a href="#" class="menu-link">Logout</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-content>
+    </ion-menu>
+
+    <!-- Main content -->
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start" *ngIf="!isLargeScreen">
+            <ion-menu-toggle>
+              <ion-button>
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
+              </ion-button>
+            </ion-menu-toggle>
+          </ion-buttons>
+          <ion-title *ngIf="!isLargeScreen">MyFinance</ion-title>
+          <app-navbar *ngIf="isLargeScreen"></app-navbar>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding main" scrollY="true">
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+    </div>
+  </ion-split-pane>
 </ion-app>

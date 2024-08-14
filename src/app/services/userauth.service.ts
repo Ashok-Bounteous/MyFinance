@@ -130,11 +130,21 @@ export class AuthService {
   //   });
   // }
 
-  async storeUserProfile(uid: string, profileData: any) {
-    try {
-      await this.db.object(`users/profiles/${uid}`).set(profileData);
-    } catch (e) {
-      console.error('Error storing profile data:', e);
+  // async storeUserProfile(uid: string, profileData: any) {
+  //   try {
+  //     await this.db.object(`users/profiles/${uid}`).set(profileData);
+  //   } catch (e) {
+  //     console.error('Error storing profile data:', e);
+  //   }
+  // }
+
+    // Method to fetch the user profile from the database
+    getProfile(uid: string): Observable<any> {
+      return this.db.object(`users/profiles/${uid}`).valueChanges();
     }
-  }
+  
+    // Method to update the user profile in the database
+    updateProfile(uid: string, profile: any): Promise<void> {
+      return this.db.object(`users/profiles/${uid}`).update(profile);
+    }
 }

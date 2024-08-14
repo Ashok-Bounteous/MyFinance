@@ -65,13 +65,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TaskService,
     provideCharts(withDefaultRegisterables()),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => {
+      const app = initializeApp(environment.firebaseConfig);
+      const auth = getAuth(app);
+      if (Capacitor.isNativePlatform()) {
+        auth.setPersistence(indexedDBLocalPersistence);
+      }
+      return auth;
+    }),
     // provideAuth(() => {
     //   if(Capacitor.isNativePlatform()){
     //     return initializeApp(getApp(), {
     //       persistence: indexedDBLocalPersistence,
     //     })
     //   }
-    //   else { getAuth()} 
+    //   else { getAuth();} 
     // }),
     provideAuth(()=> getAuth()),
     provideFirestore(()=> getFirestore()),

@@ -1,72 +1,212 @@
-ion-header {
-    ion-toolbar {
-      background-color: #f8f9fa;
-      color: #343a40;
+// ion-header {
+//     ion-toolbar {
+//       background-color: #f8f9fa;
+//       color: #343a40;
   
-      ion-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
+//       ion-title {
+//         font-size: 1.5rem;
+//         font-weight: bold;
+//       }
   
-      ion-buttons {
-        ion-button {
-          ion-icon {
-            font-size: 1.5rem;
-            color: #343a40;
-          }
-        }
-      }
-  
-      ion-list {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-  
-        ion-item {
-          --background: transparent;
-          --border-color: transparent;
-          color: #343a40;
-          margin-left: 10px;
-  
-          &:hover {
-            background-color: #e9ecef;
-          }
-  
-          &:first-child {
-            margin-left: 0;
-          }
-        }
-      }
-  
-//       @media (max-width: 760px) {
-//         ion-list {
-//           display: none;
+//       ion-buttons {
+//         ion-button {
+//           ion-icon {
+//             font-size: 1.5rem;
+//             color: #343a40;
+//           }
 //         }
 //       }
+  
+//       ion-list {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+  
+//         ion-item {
+//           --background: transparent;
+//           --border-color: transparent;
+//           color: #343a40;
+//           margin-left: 10px;
+  
+//           &:hover {
+//             background-color: #e9ecef;
+//           }
+  
+//           &:first-child {
+//             margin-left: 0;
+//           }
+//         }
+//       }
+  
+// //       @media (max-width: 760px) {
+// //         ion-list {
+// //           display: none;
+// //         }
+// //       }
+// //     }
+  
+// //     @media (max-width: 760px) {
+// //       ion-toolbar {
+// //         ion-buttons {
+// //           display: block;
+// //         }
+  
+// //         ion-title {
+// //           font-size: 1.25rem;
+// //         }
+// //       }
+// //     }
+  
+// //     @media (min-width: 761px) {
+// //       ion-toolbar {
+// //         ion-buttons {
+// //           display: none;
+// //         }
+  
+// //         ion-list {
+// //           display: flex;
+// //         }
+// //       }
 //     }
+//   }
   
-//     @media (max-width: 760px) {
-//       ion-toolbar {
-//         ion-buttons {
-//           display: block;
-//         }
-  
-//         ion-title {
-//           font-size: 1.25rem;
-//         }
-//       }
-//     }
-  
-//     @media (min-width: 761px) {
-//       ion-toolbar {
-//         ion-buttons {
-//           display: none;
-//         }
-  
-//         ion-list {
-//           display: flex;
-//         }
-//       }
+
+
+
+/* Base Colors */
+$primary-color: #0D6EFD; /* Finance blue */
+$secondary-color: #5A5A5A; /* Neutral gray */
+$text-color: #FFFFFF; /* White text */
+$background-color: #0A4275; /* Deep blue for navbar background */
+$hover-color: #063D6B; /* Darker shade for hover effect */
+
+ion-toolbar {
+  --background: #0D6EFD;//var($background-color); /* Navbar background color */
+  --color: #ffffff;//$text-color; /* Text color */
+  padding: 0 16px; /* Adjust padding for toolbar */
+  --border-color: #f24aec;
+  --border-width: 0px 0;
+  --border-style: double;
+
+  --min-height: 30px;
+  --padding-top: 0px;
+  --padding-bottom: 10px;
+
+  ion-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem; /* Font size for title */
+    font-weight: bold;
+    --color: #ffffff;//$text-color;
+
+    ion-icon {
+      color: #ffffff;//$text-color;
+      font-size: 1.8rem; /* Adjust size for the icon */
     }
   }
+
+  ion-button {
+    --background: transparent;
+    --color: #ffffff;//$text-color; /* Button text and icon color */
+    // --margin-bottom: 8px; /* Space between buttons */
+
+    // --background-activated: #88f4be;
+    // --background-focused: #88f4be;
+
   
+    --border-radius: 5%;
+    --border-color: transparent;
+    --ripple-color: deeppink;
+  
+    // --padding-top: 10px;
+    // --padding-bottom: 10px;
+    
+    ion-icon {
+      margin-right: 4px; /* Space between icon and text */
+      font-size: 1.4rem; /* Icon size */
+      color: #ffffff; /* Icon color */
+    }
+
+    &:hover {
+      --background: #ffffff; /* Background color on hover */
+      --color: #063D6B;
+      --border-color: #063D6B;
+      --border-style: solid;
+      --border-width: 1px;
+    
+      --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+      ion-icon {
+        color: #063D6B;
+      }
+    }
+
+    &:active {
+      --background: darken(#063D6B, 10%); /* Darker background on active */
+    }
+  }
+
+//   ion-buttons {
+//     ion-button {
+//       --background: transparent;
+//       --color: #ffffff;//$text-color; /* Button text and icon color */
+//       // --margin-bottom: 8px; /* Space between buttons */
+
+//       // --background-activated: #88f4be;
+//       // --background-focused: #88f4be;
+
+    
+//       --border-radius: 5%;
+//       --border-color: transparent;
+//       --ripple-color: deeppink;
+    
+//       // --padding-top: 10px;
+//       // --padding-bottom: 10px;
+      
+//       ion-icon {
+//         margin-right: 4px; /* Space between icon and text */
+//         font-size: 1.4rem; /* Icon size */
+//         color: #ffffff; /* Icon color */
+//       }
+
+//       &:hover {
+//         --background: #ffffff; /* Background color on hover */
+//         --color: #063D6B;
+//         --border-color: #063D6B;
+//         --border-style: solid;
+//         --border-width: 1px;
+      
+//         --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+//         ion-icon {
+//           color: #063D6B;
+//         }
+//       }
+
+//       &:active {
+//         --background: darken(#063D6B, 10%); /* Darker background on active */
+//       }
+//     }
+//   }
+}
+
+/* Adjusting button sizes and spacing for smaller screens */
+@media (max-width: 1000px) {//768px
+  ion-title {
+    font-size: 1.3rem; /* Smaller font for title */
+    ion-icon {
+      font-size: 1.5rem; /* Smaller icon size */
+    }
+  }
+
+  ion-buttons {
+    ion-button {
+      font-size: 0.9rem; /* Smaller text size */
+      margin: 0 4px; /* Reduced space between buttons */
+
+      ion-icon {
+        font-size: 1.2rem; /* Smaller icon size */
+      }
+    }
+  }
+}
