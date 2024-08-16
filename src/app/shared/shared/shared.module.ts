@@ -14,8 +14,10 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuModule } from 'primeng/menu';
 import { StepperModule } from 'primeng/stepper';
+import { StepsModule } from 'primeng/steps';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [],
   imports: [
@@ -35,7 +37,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MenuModule,
     StepperModule,
     InputNumberModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    StepsModule,
+    InputTextModule
   ],
   exports: [
     CommonModule,
@@ -54,7 +58,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MenuModule,
     StepperModule,
     InputNumberModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    StepsModule,
+    InputTextModule,
   ]
 })
 export class SharedModule { }

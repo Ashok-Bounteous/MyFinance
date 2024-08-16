@@ -1,28 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { Actions, createEffect, ofType } from '@ngrx/effects';
-// import { catchError, map, mergeMap } from 'rxjs/operators';
-// import { of } from 'rxjs';
-// import { HttpClient } from '@angular/common/http';
-// import * as CompanyActions from '../actions/company.actions';
-
-// @Injectable()
-// export class CompanyEffects {
-//   loadCompanyData$ = createEffect(() => this.actions$.pipe(
-//     ofType(CompanyActions.loadCompanyData),
-//     mergeMap(() =>
-//       this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=TSCO.LON&apikey=demo')
-//         .pipe(
-//           map(data => CompanyActions.loadCompanyDataSuccess({ data })),
-//           catchError(error => of(CompanyActions.loadCompanyDataFailure({ error })))
-//         )
-//     )
-//   ));
-
-//   constructor(private actions$: Actions, private http: HttpClient) {}
-// }
-
-
-
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap } from 'rxjs/operators';

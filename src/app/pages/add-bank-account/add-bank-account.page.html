@@ -1,81 +1,212 @@
-<ion-content scrollY="true">
-  <div class="info">
-    <h2>Add Bank Account</h2>
-    <p>Fill out the form below to add your bank account details.</p>
+<div class="card">
+  <p-steps [model]="items" [readonly]="false"></p-steps>
+  <div class="card-content">
+    <div *ngIf="currentStep === 0">
+      <h3>Initialization</h3>
+
+      <div class="p-field">
+        <label for="bankName">Bank Name</label>
+        <p-autoComplete id="bankName" [(ngModel)]="selectedBankCode" [suggestions]="filteredBankNames" 
+                        (completeMethod)="filterBanks($event)" (onSelect)="onBankSelect($event)"
+                        field="name" [dropdown]="true" [forceSelection]="true" [minLength]="2" [delay]="200">
+          <ng-template let-item pTemplate="item">
+            <div class="autocomplete-item">
+              <span>{{ item.name }}</span>
+              <small>{{ item.code }}</small>
+            </div>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+
+      <div class="p-field">
+        <label for="state">State</label>
+        <p-autoComplete id="state" [(ngModel)]="selectedStateCode" [suggestions]="filteredStates" 
+                        (completeMethod)="filterStates($event)" (onSelect)="onStateSelect($event)"
+                        field="name" [dropdown]="true" [forceSelection]="true" [minLength]="2" [delay]="200">
+          <ng-template let-item pTemplate="item">
+            <div class="autocomplete-item">
+              <span>{{ item.name }}</span>
+              <small>{{ item.code }}</small>
+            </div>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+
+      <div class="p-field">
+        <label for="searchType">Type</label>
+        <p-dropdown id="searchType" [(ngModel)]="searchType" [options]="[{label: 'IFSC', value: 'ifsc'}, {label: 'Search', value: 'search'}]" 
+                    optionLabel="label" placeholder="Select Type">
+        </p-dropdown>
+      </div>
+
+      <button pButton type="button" label="Next" (click)="goToNextStep()"></button>
+    </div>
+
+    <div *ngIf="currentStep === 1">
+      <h3>Bank Details</h3>
+
+      <!-- IFSC Type -->
+      <ng-container *ngIf="searchType.value === 'ifsc'">
+        <div class="card flex justify-content-center">
+          <div class="flex flex-column gap-2">
+            <label for="ifscCode">IFSC Code</label>
+            <input pInputText id="ifscCode" [(ngModel)]="ifscCode" (keyup.enter)="searchByIFSC()" />
+            <small id="username-help">Enter your username to reset your password.</small>
+          </div>
+        </div>
+        <div *ngIf="ifscResults && ifscResults.length > 0">
+          <p-table [value]="ifscResults" [paginator]="false" [responsive]="true">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Bank Name</th>
+                <th>Branch</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>IFSC</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-bank>
+              <tr (click)="selectBank(bank)">
+                <td>{{ bank.BANK }}</td>
+                <td>{{ bank.BRANCH }}</td>
+                <td>{{ bank.ADDRESS }}</td>
+                <td>{{ bank.CITY }}</td>
+                <td>{{ bank.STATE }}</td>
+                <td>{{ bank.IFSC }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </ng-container>
+
+      <!-- Search Type -->
+      <ng-container *ngIf="searchType.value === 'search'">
+        <div class="p-field">
+          <label for="searchBranch">Branch Search Results</label>
+        </div>
+        <div *ngIf="branchResults && branchResults.length > 0">
+          <p-table [value]="branchResults" [paginator]="true" [rows]="limit" [responsive]="true" (onLazyLoad)="onLazyLoad($event)">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Bank Name</th>
+                <th>Branch</th>
+                <th>Address</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-branch>
+              <tr (click)="selectBank(branch)">
+                <td>{{ branch.BANK }}</td>
+                <td>{{ branch.BRANCH }}</td>
+                <td>{{ branch.ADDRESS }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div *ngIf="!branchResults || branchResults.length === 0">
+          <p>No branches found.</p>
+        </div>
+      </ng-container>
+
+      <button pButton type="button" label="Back" (click)="goToPreviousStep()"></button>
+      <button pButton type="button" label="Next" (click)="goToNextStep()"></button>
+    </div>
+
+    <div *ngIf="currentStep === 2">
+      <h3>Account Details</h3>
+        
+        <form [formGroup]="stepForm" (ngSubmit)="goToNextStep()">
+      
+          <div class="p-field">
+            <label for="accountName">Account Name</label>
+            <input pInputText id="accountName" formControlName="accountName" />
+            <!-- <div *ngIf="stepForm.get('accountName').invalid && stepForm.get('accountName').touched" class="error-message">
+              Account Name is required and must be at least 2 characters long.
+            </div> -->
+          </div>
+      
+          <div class="p-field">
+            <label for="bankName">Bank Name</label>
+            <input pInputText id="bankName" formControlName="bankName" />
+            <!-- <div *ngIf="stepForm.get('bankName').invalid && stepForm.get('bankName').touched" class="error-message">
+              Bank Name is required.
+            </div> -->
+          </div>
+      
+          <div class="p-field">
+            <label for="accountNumber">Account Number</label>
+            <input pInputText id="accountNumber" formControlName="accountNumber" />
+            <!-- <div *ngIf="stepForm.get('accountNumber').invalid && stepForm.get('accountNumber').touched" class="error-message">
+              Account Number is required and must be between 10 and 15 characters long.
+            </div> -->
+          </div>
+      
+          <div class="p-field">
+            <label for="ifscCode">IFSC Code</label>
+            <input pInputText id="ifscCode" formControlName="ifscCode" />
+            <!-- <div *ngIf="stepForm.get('ifscCode').invalid && stepForm.get('ifscCode').touched" class="error-message">
+              IFSC Code is required.
+            </div> -->
+          </div>
+      
+          <div class="p-field">
+            <label for="branch">Branch</label>
+            <input pInputText id="branch" formControlName="branch" />
+            <!-- <div *ngIf="stepForm!= null && stepForm.get('branch') && stepForm.get('branch').touched" class="error-message">
+              Branch is required and must be at least 2 characters long.
+            </div> -->
+          </div>
+      
+          <div class="p-field">
+            <label for="state">State</label>
+            <input pInputText id="state" formControlName="state" />
+            <!-- <div *ngIf="stepForm.get('state').invalid && stepForm.get('state').touched" class="error-message">
+              State is required.
+            </div> -->
+          </div>
+      
+          <div class="p-field">
+            <label for="city">City (Optional)</label>
+            <input pInputText id="city" formControlName="city" />
+          </div>
+      
+          <div class="p-field">
+            <label for="searchBank">Search Bank (Optional)</label>
+            <input pInputText id="searchBank" formControlName="searchBank" />
+          </div>
+      
+          <div class="button-group">
+            <button pButton type="button" label="Back" (click)="goToPreviousStep()"></button>
+            <button pButton type="submit" label="Next"></button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+
+    <div *ngIf="currentStep === 3">
+      <h3>Confirmation</h3>
+    
+      <p><strong>Bank Name:</strong> {{ stepForm.get('bankName')?.value }}</p>
+      <p>{{stepForm.get('bankName')?.value}}</p>
+      <p><strong>State:</strong> {{ stepForm.get('state')?.value }}</p>
+      <p><strong>Type:</strong> {{ searchType }}</p>
+    
+      <p *ngIf="searchType === 'ifsc'">
+        <strong>IFSC Code:</strong> {{ stepForm.get('ifscCode')?.value }}
+      </p>
+    
+      <p *ngIf="searchType === 'search'">
+        <strong>Branch:</strong> {{ bankDetails?.branchName }}</p>
+      <p><strong>Account Number:</strong> {{ stepForm.get('accountNumber')?.value }}</p>
+      <p><strong>Branch Name:</strong> {{ stepForm.get('branch')?.value }}</p>
+    
+      <div class="button-group">
+        <button pButton type="button" label="Back" (click)="goToPreviousStep()"></button>
+        <button pButton type="button" label="Submit" (click)="onSubmit()"></button>
+      </div>
+    </div>
+    
+    
   </div>
-  <form [formGroup]="bankAccountForm" (ngSubmit)="onSubmit()" class="form-container">
-    <ion-item lines="none">
-      <ion-input 
-        label="Account Holder Name" 
-        labelPlacement="floating" 
-        placeholder="Enter the Account Holder Name" 
-        formControlName="accountName" 
-        required
-        lines="none"
-        errorText="Account Name is required and should be at least 2 characters long."
-        >
-      </ion-input>
-      <!-- <ion-note *ngIf="bankAccountForm.get('accountName')?.invalid && bankAccountForm.get('accountName')?.touched" color="danger">
-        Account Name is required and should be at least 2 characters long.
-      </ion-note> -->
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input 
-        label="Bank Name" 
-        labelPlacement="floating" 
-        placeholder="Enter the Bank Name" 
-        formControlName="bankName" 
-        required
-        errorText="Bank Name is required and should be at least 2 characters long.">
-      </ion-input>
-      <!-- <ion-note *ngIf="bankAccountForm.get('bankName')?.invalid && bankAccountForm.get('bankName')?.touched" color="danger">
-        Bank Name is required and should be at least 2 characters long.
-      </ion-note> -->
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input 
-        label="Account Number" 
-        labelPlacement="floating" 
-        placeholder="Enter the Account Number" 
-        type="number" 
-        minlength="10"
-        [counter]="true"
-        formControlName="accountNumber" 
-        required
-        errorText="Account Number is required and should be at least 10 digits long.">
-      </ion-input>
-      <!-- <ion-note *ngIf="bankAccountForm.get('accountNumber')?.invalid && bankAccountForm.get('accountNumber')?.touched" color="danger">
-        Account Number is required and should be at least 10 digits long.
-      </ion-note> -->
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input 
-        label="IFSC Code" 
-        labelPlacement="floating" 
-        placeholder="Enter the IFSC Code" 
-        formControlName="ifscCode" 
-        maxlength="11"
-        [counter]="true"
-        required
-        errorText="IFSC Code is required and should be 11 characters long with the correct format.">
-      </ion-input>
-      <!-- <ion-note *ngIf="bankAccountForm.get('ifscCode')?.invalid && bankAccountForm.get('ifscCode')?.touched" color="danger">
-        IFSC Code is required and should be 11 characters long with the correct format.
-      </ion-note> -->
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input 
-        label="Branch" 
-        labelPlacement="floating" 
-        placeholder="Enter the Branch" 
-        formControlName="branch" 
-        required
-        errorText="Branch is required and should be at least 2 characters long.">
-      </ion-input>
-      <!-- <ion-note *ngIf="bankAccountForm.get('branch')?.invalid && bankAccountForm.get('branch')?.touched" color="danger">
-        Branch is required and should be at least 2 characters long.
-      </ion-note> -->
-    </ion-item>
-    <ion-button expand="block" type="submit" [disabled]="!bankAccountForm.valid">Add Account</ion-button>
-  </form>
-</ion-content>
+

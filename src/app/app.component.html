@@ -125,7 +125,13 @@
             <ion-icon name="flask" slot="start"></ion-icon>
             <a routerLink="/sample2" class="menu-link">Sample2</a>
             <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-item>          
+          <ion-item>
+            <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+            <a routerLink="/task-manager" class="menu-link">Task Manager</a>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
           </ion-item>
+
           <ion-item *ngIf="isAuthenticated" (click)="onLogout()">
             <ion-icon name="log-out" slot="start"></ion-icon>
             <a href="#" class="menu-link">Logout</a>
