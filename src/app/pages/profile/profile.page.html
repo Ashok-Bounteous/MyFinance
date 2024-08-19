@@ -1,67 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Profile</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="editProfile()">Edit</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Profile Details</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label position="floating">Name</ion-label>
-          <ion-input [(ngModel)]="profile.name" readonly></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Age</ion-label>
-          <ion-input [(ngModel)]="profile.age" readonly></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Date of Birth</ion-label>
-          <ion-input [(ngModel)]="profile.dob" readonly></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Address</ion-label>
-          <ion-input [(ngModel)]="profile.address" readonly></ion-input>
-        </ion-item>
-      </ion-list>
-
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Bank Accounts</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let account of profile.bankAccounts">
-              <ion-label>{{ account.name }}</ion-label>
-              <ion-note slot="end">{{ account.balance | currency }}</ion-note>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Total Balance</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-label>{{ totalBalance | currency }}</ion-label>
-        </ion-card-content>
-      </ion-card>
-    </ion-card-content>
-  </ion-card>
-</ion-content> -->
-
-
-
-
 <ion-content class="profile-content">
 <ion-header>
   <ion-toolbar color="primary">
@@ -71,7 +7,7 @@
 
   <div class="profile-container">
 
-    <ion-card class="profile-card">
+     <ion-card class="profile-card">
       <ion-card-header>
         <ion-card-title>User Information</ion-card-title>
         <ion-note>Joined on {{ profile.joinedOn| date: 'longDate' }}</ion-note>
@@ -88,6 +24,24 @@
           </ion-row>
         </ion-grid>
       </ion-card-content>
+    </ion-card>
+
+     <!-- Profile Image Section -->
+     <ion-card class="profile-card">
+      <ion-card-header>
+        <ion-card-title>Profile Image</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="image-content">
+        <div *ngIf="profile.imageURL; else noImage">
+          <img [src]="profile.imageURL" alt="Profile Image" class="profile-image"/>
+          <ion-button color="danger" (click)="deleteImage()">Delete Image</ion-button>
+        </div>
+        <ng-template #noImage>
+          <ion-label>No image available.</ion-label>
+        </ng-template>
+        <ion-button color="primary" (click)="triggerFileInput()">Upload Image</ion-button>
+        <input type="file" #fileInput accept="image/*" (change)="handleFileInput($event)" style="display:none">
+              </ion-card-content>
     </ion-card>
 
     <!-- User Profile Section -->

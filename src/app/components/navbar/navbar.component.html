@@ -1,21 +1,26 @@
 <ion-toolbar>
-
   <ion-title>
     <ion-icon name="cash-outline" slot="start" style="margin-right: 8px;"></ion-icon>
     MyFinance
   </ion-title>
+  <ion-avatar slot="end">
+    <img *ngIf="profileImageUrl; else defaultAvatar" [src]="profileImageUrl" alt="Profile Picture">
+    <ng-template #defaultAvatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ng-template>
+  </ion-avatar>
   <ion-button (click)="onLogout()" fill="outline" shape="round" slot="primary">
     <ion-icon name="log-out" slot="start"></ion-icon>
-       Logout
-      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+    Logout
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
   </ion-button>
 </ion-toolbar>
-<ion-toolbar>
 
+<ion-toolbar>
   <ion-buttons slot="start">
     <ion-button routerLink="/landing">
       <ion-icon name="home" slot="start"></ion-icon>
-      Landing
+      Home
     </ion-button>
     <ion-button routerLink="/dashboard">
       <ion-icon name="speedometer" slot="start"></ion-icon>
@@ -46,18 +51,15 @@
       <ion-icon name="cash-outline" slot="start"></ion-icon>
       Transactions
     </ion-button>
-
     <!-- Past Transactions Button -->
     <ion-button routerLink="/past-transactions">
       <ion-icon name="time-outline" slot="start"></ion-icon>
       Past Transactions
     </ion-button>
-
     <!-- Task Manager Button -->
     <ion-button routerLink="/task-manager">
       <ion-icon name="clipboard-outline" slot="start"></ion-icon>
       Task Manager
     </ion-button>
-    
   </ion-buttons>
 </ion-toolbar>

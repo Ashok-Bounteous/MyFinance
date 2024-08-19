@@ -53,6 +53,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { AuthService } from './services/userauth.service';
+import { AvatarService } from './services/avatar.service'; // Import AvatarService
 import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 
@@ -65,8 +66,15 @@ export class AppComponent implements OnInit {
 
   isAuthenticated = false;
   isLargeScreen = false;
+  userImageUrl: string | null = null;
 
-  constructor(private auth: Auth, private authService: AuthService, private router: Router, private primengConfig: PrimeNGConfig) {}
+  constructor(
+    private auth: Auth, 
+    private authService: AuthService, 
+    private avatarService: AvatarService, // Inject AvatarService
+    private router: Router, 
+    private primengConfig: PrimeNGConfig
+  ) {}
 
   ngOnInit() {
     this.checkAuthentication();
@@ -85,8 +93,13 @@ export class AppComponent implements OnInit {
   }
 
   private checkAuthentication() {
-    onAuthStateChanged(this.auth, (user: User | null) => {
+    onAuthStateChanged(this.auth, async (user: User | null) => {
       this.isAuthenticated = !!user;
+
+      if (this.isAuthenticated) {
+        const profile = await this.avatarService.getUserProfile();
+        // this.userImageUrl = profile?.imageURL || null;
+      }
     });
   }
 

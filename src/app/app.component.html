@@ -73,7 +73,7 @@
         <ion-menu-toggle>
           <ion-item>
             <ion-icon name="home" slot="start"></ion-icon>
-            <a routerLink="/landing" class="menu-link">Landing</a>
+            <a routerLink="/landing" class="menu-link">Home</a>
             <ion-ripple-effect type="unbounded"></ion-ripple-effect>
           </ion-item>
           <ion-item>
@@ -86,7 +86,7 @@
             <a routerLink="/login" class="menu-link">Login</a>
             <ion-ripple-effect type="unbounded"></ion-ripple-effect>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="isAuthenticated">
             <ion-icon name="speedometer" slot="start"></ion-icon>
             <a routerLink="/dashboard" class="menu-link">Dashboard</a>
             <ion-ripple-effect type="unbounded"></ion-ripple-effect>
@@ -143,7 +143,7 @@
 
     <!-- Main content -->
     <div class="ion-page" id="main-content">
-      <ion-header>
+      <ion-header  *ngIf="isAuthenticated">
         <ion-toolbar>
           <ion-buttons slot="start" *ngIf="!isLargeScreen">
             <ion-menu-toggle>
@@ -153,6 +153,20 @@
             </ion-menu-toggle>
           </ion-buttons>
           <ion-title *ngIf="!isLargeScreen">MyFinance</ion-title>
+          <ion-buttons slot="end" *ngIf="isAuthenticated">
+            <!-- <ion-button>
+              <ion-avatar>
+                <img *ngIf="userImageUrl; else defaultIcon" [src]="userImageUrl" />
+                <ng-template #defaultIcon>
+                  <ion-icon name="person-circle" style="font-size: 28px;"></ion-icon>
+                </ng-template>
+              </ion-avatar>
+            </ion-button> -->
+            <ion-button (click)="onLogout()">
+              <ion-icon name="log-out"></ion-icon>
+              Logout
+            </ion-button>
+          </ion-buttons>
           <app-navbar *ngIf="isLargeScreen"></app-navbar>
         </ion-toolbar>
       </ion-header>
