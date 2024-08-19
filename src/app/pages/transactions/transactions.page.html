@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Transactions</ion-title>
   </ion-toolbar>
@@ -6,7 +6,6 @@
 
 <ion-content>
   <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
-    <!-- Form fields for transaction details -->
     <ion-item>
       <ion-label position="floating">Transaction Type</ion-label>
       <ion-select formControlName="transactionType">
@@ -76,4 +75,112 @@
       <ion-button color="danger" *ngIf="transaction.id" (click)="deleteTransaction(transaction.id)">Delete</ion-button>
     </ion-item>
   </ion-list>
+</ion-content> -->
+
+
+
+<ion-content>
+    <ion-toolbar>
+      <ion-title>Transactions</ion-title>
+    </ion-toolbar>
+  <div class="container">
+    <!-- Form Section -->
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="transactionType">Transaction Type</label>
+          <p-dropdown
+            id="transactionType"
+            [options]="transactionTypes"
+            formControlName="transactionType"
+            placeholder="Select Transaction Type"
+            (onChange)="updateCategoryOptions()">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <p-dropdown
+            id="category"
+            [options]="categoryOptions"
+            formControlName="category"
+            placeholder="Select Category">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="accountId">Account</label>
+          <p-dropdown
+            id="accountId"
+            [options]="bankAccounts"
+            formControlName="accountId"
+            optionLabel="accountNumber"
+            placeholder="Select Account">
+          </p-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="transactionDate">Transaction Date</label>
+          <p-calendar id="transactionDate" formControlName="transactionDate" placeholder="Select Date"></p-calendar>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <p-inputNumber id="amount" type="number" formControlName="amount" placeholder="Amount"></p-inputNumber>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" pInputText formControlName="description" placeholder="Description"/>
+        </div>
+
+        <div class="form-group">
+          <label for="tags">Tags</label>
+          <input type="text" id="tags" pInputText formControlName="tags" placeholder="Tags" />
+        </div>
+
+        <div class="form-group">
+          <label for="recurring">Recurring</label>
+          <p-toggleButton
+            id="recurring"
+            onLabel="true"
+            offLabel="false"
+            formControlName="recurring">
+          </p-toggleButton>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <p-dropdown
+            id="status"
+            [options]="statusOptions"
+            formControlName="status"
+            placeholder="Select Status">
+          </p-dropdown>
+        </div>
+
+      </div>
+      <div class="center-button">
+        <ion-button type="submit" [disabled]="!transactionForm.valid">Add Transaction</ion-button>
+      </div>
+
+      <!-- Org Chart Section -->
+      <div class="org-chart">
+        <p-tree [value]="categoryTree"></p-tree>
+      </div>
+    </form>
+  </div>
 </ion-content>
+
+
+    <!-- List of Transactions -->
+    <!-- <p-listbox [options]="transactions" (onClick)="deleteTransaction($event.value.id)">
+      <ng-template let-item pTemplate="item">
+        <div class="transaction-item">
+          <h2>{{ item.category }}</h2>
+          <p>{{ item.amount | currency }}</p>
+          <p>{{ item.transactionDate }}</p>
+          <p>{{ item.description }}</p>
+        </div>
+      </ng-template>
+    </p-listbox> -->

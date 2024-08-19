@@ -18,6 +18,10 @@ import { StepsModule } from 'primeng/steps';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { InputTextModule } from 'primeng/inputtext';
+import { TreeModule } from 'primeng/tree'
+import { ListboxModule } from 'primeng/listbox'
+import { OrganizationChartModule } from 'primeng/organizationchart';
+import {ToggleButtonModule} from 'primeng/togglebutton'
 @NgModule({
   declarations: [],
   imports: [
@@ -39,7 +43,11 @@ import { InputTextModule } from 'primeng/inputtext';
     InputNumberModule,
     ProgressSpinnerModule,
     StepsModule,
-    InputTextModule
+    InputTextModule,
+    ListboxModule,
+    TreeModule,
+    ToggleButtonModule,
+    OrganizationChartModule
   ],
   exports: [
     CommonModule,
@@ -61,6 +69,10 @@ import { InputTextModule } from 'primeng/inputtext';
     ProgressSpinnerModule,
     StepsModule,
     InputTextModule,
+    ListboxModule,
+    TreeModule,
+    ToggleButtonModule,
+    OrganizationChartModule
   ]
 })
 export class SharedModule { }
