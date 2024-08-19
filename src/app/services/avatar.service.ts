@@ -66,7 +66,7 @@ export class AvatarService {
   // Method to fetch user profile including the image URL
   getUserProfile() {
     const user = this.auth.currentUser;
-    const userProfilePath = `users/profile/${user?.uid}`;
+    const userProfilePath = `users/profiles/${user?.uid}`;
     return this.db.object(userProfilePath).valueChanges();
   }
 
@@ -92,7 +92,7 @@ export class AvatarService {
       const imageURL = await getDownloadURL(storageRef);
 
       // Update the user's profile in the Realtime Database
-      const userProfilePath = `users/profile/${user.uid}`;
+      const userProfilePath = `users/profiles/${user.uid}`;
       await this.db.object(userProfilePath).update({ imageURL });
 
       return imageURL;
@@ -117,7 +117,7 @@ export class AvatarService {
       await deleteObject(storageRef);
 
       // Remove the image URL from the user's profile in the Realtime Database
-      const userProfilePath = `users/profile/${user.uid}`;
+      const userProfilePath = `users/profiles/${user.uid}`;
       await this.db.object(userProfilePath).update({ imageURL: null });
 
       return true;
