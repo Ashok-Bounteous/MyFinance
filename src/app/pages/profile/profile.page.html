@@ -1,20 +1,21 @@
 <ion-content class="profile-content">
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
   <div class="profile-container">
 
-     <ion-card class="profile-card">
+    <!-- User Information Card -->
+    <ion-card class="profile-card">
       <ion-card-header>
         <ion-card-title>User Information</ion-card-title>
-        <ion-note>Joined on {{ profile.joinedOn| date: 'longDate' }}</ion-note>
+        <ion-note>Joined on {{ profile.joinedOn | date: 'longDate' }}</ion-note>
       </ion-card-header>
       <ion-card-content>
         <ion-grid>
-          <ion-row class="grid_row">
+          <ion-row>
             <ion-item class="profile-item">
               <ion-input label="User ID" labelPlacement="fixed" [value]="profile.uid" readonly></ion-input>
             </ion-item>
@@ -26,38 +27,37 @@
       </ion-card-content>
     </ion-card>
 
-     <!-- Profile Image Section -->
-     <ion-card class="profile-card">
+    <!-- Profile Image Card -->
+    <ion-card class="profile-card">
       <ion-card-header>
         <ion-card-title>Profile Image</ion-card-title>
       </ion-card-header>
       <ion-card-content class="image-content">
         <div *ngIf="profile.imageURL; else noImage">
           <img [src]="profile.imageURL" alt="Profile Image" class="profile-image"/>
-          <ion-button color="danger" (click)="deleteImage()">Delete Image</ion-button>
         </div>
         <ng-template #noImage>
           <ion-label>No image available.</ion-label>
         </ng-template>
+        <ion-button *ngIf="noImage" color="danger" (click)="deleteImage()">Delete Image</ion-button>
         <ion-button color="primary" (click)="triggerFileInput()">Upload Image</ion-button>
         <input type="file" #fileInput accept="image/*" (change)="handleFileInput($event)" style="display:none">
-              </ion-card-content>
+      </ion-card-content>
     </ion-card>
 
-    <!-- User Profile Section -->
+    <!-- User Profile Card -->
     <ion-card class="profile-card">
       <ion-card-header>
-      <ion-toolbar>
-        <ion-card-title>User Profile</ion-card-title>
-        <ion-buttons slot="end">
-          <ion-button fill="outline" [color]="editMode ? 'danger' : 'primary'" (click)="toggleEdit()">
-            <ion-icon slot="start" [name]="editMode ? 'close' : 'create'"></ion-icon>
-            {{ editMode ? 'Cancel' : 'Edit' }}
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-card-header>
-      
+        <ion-toolbar>
+          <ion-card-title>User Profile</ion-card-title>
+          <ion-buttons slot="end">
+            <ion-button fill="outline" [color]="editMode ? 'danger' : 'primary'" (click)="toggleEdit()">
+              <ion-icon slot="start" [name]="editMode ? 'close' : 'create'"></ion-icon>
+              {{ editMode ? 'Cancel' : 'Edit' }}
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-card-header>
       <ion-card-content>
         <div class="profile-grid">
           <ion-item class="profile-item">
@@ -105,32 +105,41 @@
           <ion-button color="success" *ngIf="editMode" (click)="saveProfile()">Save</ion-button>
         </div>
       </ion-card-content>
+      </ion-card>
 
-      <ion-card-header>
-        <ion-card-title>Bank Accounts</ion-card-title>
-      </ion-card-header>
-      <div *ngIf="profile.bankAccounts?.length; else noAccounts">
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let account of profile.bankAccounts">
-              <ion-label>{{ account.name }}</ion-label>
-              <ion-note slot="end">{{ account.balance | currency }}</ion-note>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </div>
-      <ng-template #noAccounts>
-        <ion-card-content>
-          <ion-label>No bank accounts available.</ion-label>
-        </ion-card-content>
-      </ng-template>
+      <!-- Bank Accounts Card -->
+      <ion-card class="profile-card">
+        <ion-card-header>
+          <ion-card-title>Bank Accounts</ion-card-title>
+        </ion-card-header>
+        <div *ngIf="profile.bankAccounts?.length; else noAccounts">
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let account of profile.bankAccounts">
+                <ion-label>{{ account.name }}</ion-label>
+                <ion-note slot="end">{{ account.balance | currency:'INR' }}</ion-note>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </div>
+        <ng-template #noAccounts>
+          <ion-card-content>
+            <ion-label>No bank accounts available!</ion-label>
+            <ion-label>  Check Bank Details.</ion-label>
+          </ion-card-content>
+        </ng-template>
+      </ion-card>
 
-      <ion-card-header>
-        <ion-card-title>Total Balance</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-label>{{ totalBalance | currency }}</ion-label>
-      </ion-card-content>
-    </ion-card>
-  </div>
-</ion-content>
+      <!-- Total Balance Card -->
+      <ion-card class="profile-card">
+        <ion-card-header>
+          <ion-card-title>Total Balance</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label>{{ totalBalance | currency:'INR' }}</ion-label>
+          <ion-label>   Check Bank Details for more information.</ion-label>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+  </ion-content>
