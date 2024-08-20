@@ -3,17 +3,17 @@
     <ion-icon name="cash-outline" slot="start" style="margin-right: 8px;"></ion-icon>
     MyFinance
   </ion-title>
-  <ion-avatar slot="end">
+  <ion-avatar (click)="openProfilePopover($event)" slot="end">
     <img *ngIf="profileImageUrl; else defaultAvatar" [src]="profileImageUrl" alt="Profile Picture">
     <ng-template #defaultAvatar>
       <ion-icon name="person-circle-outline"></ion-icon>
     </ng-template>
   </ion-avatar>
-  <ion-button (click)="onLogout()" fill="outline" shape="round" slot="primary">
+  <!-- <ion-button (click)="onLogout()" fill="outline" shape="round" slot="primary">
     <ion-icon name="log-out" slot="start"></ion-icon>
     Logout
     <ion-ripple-effect type="unbounded"></ion-ripple-effect>
-  </ion-button>
+  </ion-button> -->
 </ion-toolbar>
 
 <ion-toolbar>
@@ -30,7 +30,7 @@
       <ion-icon name="stats-chart" slot="start"></ion-icon>
       Company Data
     </ion-button>
-    <ion-button routerLink="/bank-details">
+    <!-- <ion-button routerLink="/bank-details">
       <ion-icon name="card" slot="start"></ion-icon>
       Bank Details
     </ion-button>
@@ -41,7 +41,7 @@
     <ion-button routerLink="/add-bank-account">
       <ion-icon name="add-circle" slot="start"></ion-icon>
       Add Bank Account
-    </ion-button>
+    </ion-button> -->
     <ion-button routerLink="/budget-planning">
       <ion-icon name="calculator" slot="start"></ion-icon>
       Budget Planning
@@ -49,7 +49,7 @@
     <!-- Transactions Button -->
     <ion-button routerLink="/transactions">
       <ion-icon name="cash-outline" slot="start"></ion-icon>
-      Transactions
+      New Transaction
     </ion-button>
     <!-- Past Transactions Button -->
     <ion-button routerLink="/past-transactions">

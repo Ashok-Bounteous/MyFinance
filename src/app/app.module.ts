@@ -39,9 +39,10 @@ const { Keyboard } = Plugins;
 
 import { SharedModule } from './shared/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfilePopoverComponent } from './components/profile-popover/profile-popover.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, ProfilePopoverComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 

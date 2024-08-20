@@ -1,0 +1,48 @@
+ion-content {
+    --background: #ffffff; // Background color of the popover
+  
+    ion-list {
+      padding: 0; // Remove default padding
+    }
+  
+    ion-button {
+      --border-radius: none;//8px; // Rounded corners for buttons
+      --padding-start: 16px; // Padding inside button (left side)
+      --padding-end: 16px; // Padding inside button (right side)
+      --padding-top: 10px; // Padding inside button (top side)
+      --padding-bottom: 10px; // Padding inside button (bottom side)
+      --icon-margin-end: 10px; // Margin between icon and text
+      --margin: 10px;
+      --color: var(--ion-color-primary); // Text color
+      --background: none;//white; // Background color of buttons
+  
+      // Customize button appearance
+      &.button {
+        margin: 0; // Remove default margin
+        font-size: 16px; // Font size for button text
+        text-align: start; // Align text to start
+      }
+  
+      // Style for the primary button
+    //   &[fill="outline"] {
+    //     --border-color: #007bff; // Border color for outline button
+    //     --color: #007bff; // Text color for outline button
+    //   }
+  
+      // Style for buttons with round shape
+    //   &[shape="round"] {
+    //     --border-radius: 20px; // Round button shape
+    //   }
+  
+      ion-icon {
+        font-size: 20px; // Size of icons inside buttons
+        color: #007bff; // Icon color
+      }
+  
+      // Ripple effect customization
+      ion-ripple-effect {
+        --ripple-color: rgba(0, 123, 255, 0.2); // Ripple color
+      }
+    }
+  }
+  

@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-list>
+    <ion-button routerLink="/profile">
+      <ion-icon name="person-circle" slot="start"></ion-icon>
+      Profile
+    </ion-button>
+    <ion-button routerLink="/bank-details">
+      <ion-icon name="card" slot="start"></ion-icon>
+      Bank Details
+    </ion-button>
+    <ion-button routerLink="/transactions">
+      <ion-icon name="cash-outline" slot="start"></ion-icon>
+      Transactions
+    </ion-button>
+    <ion-button routerLink="/add-bank-account">
+      <ion-icon name="add-circle" slot="start"></ion-icon>
+      Add Bank Account
+    </ion-button>
+    <ion-button (click)="onLogout()">
+      <ion-icon name="log-out" slot="start"></ion-icon>
+      Logout
+      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+    </ion-button>
+  </ion-list>
+</ion-content>
