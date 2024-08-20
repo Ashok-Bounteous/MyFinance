@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
   
   .form-group {
@@ -44,6 +44,10 @@
   ion-toolbar {
     --background: var(--ion-color-primary-contrast);
     --color: var(--ion-color-dark);
+    
+    --min-height: 20px;
+    --padding-top: 2px;
+    --padding-bottom: 2px;
 
   }
   
@@ -71,7 +75,7 @@
   // Container Backgrounds
   .container {
     background-color: var(--ion-color-primary-contrast);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
   }
 

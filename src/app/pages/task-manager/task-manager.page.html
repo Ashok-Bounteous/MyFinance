@@ -83,7 +83,29 @@
                 <ion-input label="Description" labelPlacement="floating" type="textarea" name="description" [(ngModel)]="model.description" required></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input label="Deadline" labelPlacement="floating" type="datetime" name="deadline" [(ngModel)]="model.deadline" required></ion-input>
+                <!-- <ion-input label="Deadline" labelPlacement="floating" type="datetime" name="deadline" [(ngModel)]="model.deadline" required></ion-input> -->
+                <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+                <ion-modal class="dateFormat" [keepContentsMounted]="true">
+                  <ng-template>
+                    <ion-datetime
+                      id="datetime"
+                      presentation="date-time"
+                      [(ngModel)]="model.deadline"
+                      [formatOptions]="{
+                        date: {
+                          weekday: 'short',
+                          month: 'long',
+                          day: '2-digit',
+                        },
+                        time: {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        },
+                      }"
+                    ></ion-datetime>
+                  </ng-template>
+                </ion-modal>
               </ion-item>
               <ion-item>
                 <ion-select label="Priority" labelPlacement="floating" name="priority" [(ngModel)]="model.priority">

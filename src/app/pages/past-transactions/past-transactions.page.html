@@ -1,79 +1,84 @@
 <ion-content>
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Past Transactions</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Past Transactions</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-
-        <p-accordion [activeIndex]="0">
-          <p-accordionTab header="Advanced Filters">
-        <div class="filter-section flex-container">
-          <div class="card flex-item">
-            <p-multiSelect 
-                [options]="statuses" 
-                [(ngModel)]="selectedStatus" 
-                [filter]="true" 
-                optionLabel="label" 
-                placeholder="Select Status"
-                display="chip">
-            </p-multiSelect>
-          </div>
-  
-          <div class="card flex-item">
-            <p-multiSelect 
-                [options]="transactionTypes" 
-                [(ngModel)]="selectedTransactionTypes" 
-                [filter]="true" 
-                optionLabel="label" 
-                placeholder="Select Type"
-                display="chip">
-            </p-multiSelect>
-          </div>
-  
-          <span class="flex-item">
-              <ion-label>Date Range</ion-label>
-              <p-calendar 
-                [(ngModel)]="selectedDateRange" 
-                selectionMode="range" 
-                dateFormat="dd/mm/yy" 
-                placeholder="Select Date Range">
-              </p-calendar>
-          </span>
-  
-          <span class="flex-item">
-            <ion-item>
-              <ion-label>Timeline</ion-label>
-              <ion-select [(ngModel)]="selectedTimeline">
-                <ion-select-option value="day">Day</ion-select-option>
-                <ion-select-option value="month">Month</ion-select-option>
-                <ion-select-option value="year">Year</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </span>
-  
-          <span class="flex-item full-width">
-            <ion-button expand="block" (click)="applyFilters()">Apply Filters</ion-button>
-          </span>
+  <p-accordion [activeIndex]="0">
+    <p-accordionTab header="Advanced Filters">
+      <div class="filter-section flex-container">
+        <div class="card flex-item">
+          <label>Transaction Status</label>
+          <p-multiSelect 
+              [options]="statuses" 
+              [(ngModel)]="selectedStatus" 
+              [filter]="true" 
+              optionLabel="label" 
+              placeholder="Select Status"
+              display="chip"
+              [showClear]="true">
+          </p-multiSelect>
         </div>
-        </p-accordionTab>
-        </p-accordion>
+
+        <div class="card flex-item">
+          <label>Transaction Types</label>
+          <p-multiSelect 
+              [options]="transactionTypes" 
+              [(ngModel)]="selectedTransactionTypes" 
+              [filter]="true" 
+              optionLabel="label" 
+              placeholder="Select Type"
+              display="chip"
+              [showClear]="true">
+          </p-multiSelect>
+        </div>
+
+        <span class="card flex-item">
+          <label>Date Range</label>
+          <p-calendar 
+            [(ngModel)]="selectedDateRange" 
+            selectionMode="range" 
+            dateFormat="dd/mm/yy" 
+            placeholder="Select Date Range">
+          </p-calendar>
+        </span>
+
+        <!-- Commented Section -->
+        <!--
+        <span class="flex-item">
+          <ion-item>
+            <ion-label>Timeline</ion-label>
+            <ion-select [(ngModel)]="selectedTimeline">
+              <ion-select-option value="day">Day</ion-select-option>
+              <ion-select-option value="month">Month</ion-select-option>
+              <ion-select-option value="year">Year</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </span>
+        -->
+
+        <span class="flex-item full-width">
+          <ion-button expand="block" (click)="applyFilters()">Apply Filters</ion-button>
+        </span>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
 
   <ion-segment [(ngModel)]="segment">
-    <ion-segment-button value="table" (click)=" applyFilters()">
+    <ion-segment-button value="table" (click)="applyFilters()">
       <ion-label>Table</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="chart" (click)=" applyFilters()">
+    <ion-segment-button value="chart" (click)="applyFilters()">
       <ion-label>Chart</ion-label>
     </ion-segment-button>
   </ion-segment>
-
 
   <ion-list>
     <ion-item *ngFor="let filter of selectedFilters">{{filter}}</ion-item>
   </ion-list>
 
-  <div *ngIf="segment === 'table'">
+  <div *ngIf="segment === 'table'" class="table-container">
     <p-table [value]="filteredTransactions" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [responsiveLayout]="'scroll'">
       <ng-template pTemplate="header">
         <tr>
@@ -81,50 +86,46 @@
           <th pSortableColumn="transactionType">Type <p-sortIcon field="transactionType"></p-sortIcon></th>
           <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
           <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
-          <th>Actions</th>
+          <!-- <th>Actions</th> -->
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-transaction>
         <tr>
           <td>{{ transaction.transactionDate | date:'shortDate' }}</td>
           <td>{{ transaction.transactionType }}</td>
-          <td>{{ transaction.amount | currency }}</td>
+          <td>{{ transaction.amount | currency:'INR' }}</td>
           <td>{{ transaction.status }}</td>
-          <td>
-            <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info">.</button>
-            <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger">.</button>
-          </td>
+          <!-- <td>
+            <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-info"></button>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+          </td> -->
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5">No transactions found.</td>
+          <td colspan="4">No transactions found.</td> <!--should be  colspan="5" if we add actions-->
         </tr>
       </ng-template>
     </p-table>
   </div>
-  
 
   <div *ngIf="segment === 'chart'" class="chart-grid">
-    <!-- <canvas id="transactionBarChart"></canvas>
-    <canvas id="transactionPieChart"></canvas> -->
-    <!-- <ion-content>
-      <div *ngIf="segment === 'chart'" class="chart-grid"> -->
-        <div class="chart-container">
-          <canvas id="transactionBarChart"></canvas>
-        </div>
-        <div class="chart-container">
-          <canvas id="transactionPieChart"></canvas>
-        </div>
-        <div class="chart-container">
-          <canvas id="transactionDoughnutChart"></canvas>
-        </div>
-        <div class="chart-container">
-          <canvas id="transactionRadarChart"></canvas>
-        </div>
-      <!-- </div>
-    </ion-content> -->
-    
-    
+    <!-- Charts with labels -->
+    <div class="chart-container">
+      <label>Inflow vs Outflow</label>
+      <canvas id="transactionBarChart"></canvas>
+    </div>
+    <div class="chart-container">      
+      <label>Overall Shares</label>
+      <canvas id="transactionPieChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <label>Overall Shares in %</label>
+      <canvas id="transactionDoughnutChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <label>Year-wise Comparison</label>
+      <canvas id="transactionRadarChart"></canvas>
+    </div>
   </div>
 </ion-content>
