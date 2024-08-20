@@ -63,14 +63,13 @@
 //   width: 100%;
 // }
 
-
 .card {
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   max-width: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .card .p-field {
@@ -121,25 +120,43 @@
   background-color: #f4f4f4;
 }
 
-.card button {
+.card ion-button {
   margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 
-.card .p-button {
-  margin-top: 1.5rem;
+.card ion-button {
+  margin-top: 0.5rem;
 }
 
 .card-content {
-  max-height: calc(100vh - 200px);
+  // max-height: calc(100vh - 200px);
   overflow-y: auto;
   padding-right: 1rem;
+}
+
+.selected-bank-details {
+  margin-top: 1rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 10px;
+}
+
+.grid-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
 }
 
 @media (max-width: 768px) {
   .card-content {
     padding: 0;
     max-height: none;
-    overflow-y: visible;
+    // overflow-y: auto; /* Ensure scrolling is enabled on small screens */
   }
   
   .p-table th,
@@ -147,7 +164,32 @@
     font-size: 0.875rem;
   }
   
-  .card button {
+  .grid-container {
+    grid-template-columns: 1fr; /* One column on small screens */
+  }
+
+  .card ion-button {
     margin-top: 1rem;
+    --padding: 0;
+  }
+}
+
+/* Additional media query for very small screens */
+@media (max-width: 480px) {
+  .card {
+    padding: 0.5rem;
+  }
+
+  .p-table th,
+  .p-table td {
+    padding: 0.5rem;
+  }
+
+  .grid-container {
+    gap: 5px; /* Reduce gap between grid items */
+  }
+
+  .grid-item {
+    padding: 8px;
   }
 }

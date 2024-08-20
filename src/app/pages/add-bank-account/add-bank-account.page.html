@@ -1,5 +1,12 @@
+<ion-content>
 <div class="card">
-  <p-steps [model]="items" [readonly]="false"></p-steps>
+  <p-steps 
+  [model]="items" 
+  [readonly]="true"
+  [activeIndex]="activeIndex" 
+  (activeIndexChange)="onActiveIndexChange($event)">
+  </p-steps>
+
   <div class="card-content">
     <div *ngIf="currentStep === 0">
       <h3>Initialization</h3>
@@ -8,7 +15,7 @@
         <label for="bankName">Bank Name</label>
         <p-autoComplete id="bankName" [(ngModel)]="selectedBankCode" [suggestions]="filteredBankNames" 
                         (completeMethod)="filterBanks($event)" (onSelect)="onBankSelect($event)"
-                        field="name" [dropdown]="true" [forceSelection]="true" [minLength]="2" [delay]="200">
+                        field="name" [forceSelection]="false" [minLength]="1" [delay]="200">
           <ng-template let-item pTemplate="item">
             <div class="autocomplete-item">
               <span>{{ item.name }}</span>
@@ -22,7 +29,7 @@
         <label for="state">State</label>
         <p-autoComplete id="state" [(ngModel)]="selectedStateCode" [suggestions]="filteredStates" 
                         (completeMethod)="filterStates($event)" (onSelect)="onStateSelect($event)"
-                        field="name" [dropdown]="true" [forceSelection]="true" [minLength]="2" [delay]="200">
+                        field="name" [dropdown]="false" [forceSelection]="false" [minLength]="1" [delay]="200">
           <ng-template let-item pTemplate="item">
             <div class="autocomplete-item">
               <span>{{ item.name }}</span>
@@ -39,19 +46,19 @@
         </p-dropdown>
       </div>
 
-      <button pButton type="button" label="Next" (click)="goToNextStep()"></button>
+      <ion-button type="button" (click)="goToNextStep()" [disabled]="!isStepValid()">Next</ion-button>
     </div>
 
     <div *ngIf="currentStep === 1">
       <h3>Bank Details</h3>
-
+    
       <!-- IFSC Type -->
       <ng-container *ngIf="searchType.value === 'ifsc'">
         <div class="card flex justify-content-center">
           <div class="flex flex-column gap-2">
             <label for="ifscCode">IFSC Code</label>
             <input pInputText id="ifscCode" [(ngModel)]="ifscCode" (keyup.enter)="searchByIFSC()" />
-            <small id="username-help">Enter your username to reset your password.</small>
+            <small id="username-help">Enter your IFSC code to search.</small>
           </div>
         </div>
         <div *ngIf="ifscResults && ifscResults.length > 0">
@@ -79,14 +86,20 @@
           </p-table>
         </div>
       </ng-container>
-
+    
       <!-- Search Type -->
       <ng-container *ngIf="searchType.value === 'search'">
         <div class="p-field">
           <label for="searchBranch">Branch Search Results</label>
         </div>
         <div *ngIf="branchResults && branchResults.length > 0">
-          <p-table [value]="branchResults" [paginator]="true" [rows]="limit" [responsive]="true" (onLazyLoad)="onLazyLoad($event)">
+          <p-table 
+            [value]="branchResults" 
+            [paginator]="true" 
+            [rows]="limit" 
+            [totalRecords]="totalRecords" 
+            [lazy]="true" 
+            (onLazyLoad)="onLazyLoad($event)">
             <ng-template pTemplate="header">
               <tr>
                 <th>Bank Name</th>
@@ -107,10 +120,29 @@
           <p>No branches found.</p>
         </div>
       </ng-container>
+      
+      <!-- Selected Bank Details Display -->
+      <div *ngIf="branchDetails" class="selected-bank-details">
+        <h4>Selected Bank Details:</h4>
+        <div class="grid-container">
+          <div class="grid-item"><strong>Bank Name:</strong> {{ branchDetails.BANK }}</div>
+          <div class="grid-item"><strong>Branch:</strong> {{ branchDetails.BRANCH }}</div>
+          <div class="grid-item"><strong>Address:</strong> {{ branchDetails.ADDRESS }}</div>
+          <div class="grid-item"><strong>City:</strong> {{ branchDetails.CITY }}</div>
+          <div class="grid-item"><strong>State:</strong> {{ branchDetails.STATE }}</div>
+          <div class="grid-item"><strong>IFSC:</strong> {{ branchDetails.IFSC }}</div>
+          <div class="grid-item"><strong>Contact:</strong> {{ branchDetails.CONTACT }}</div>
+          <div class="grid-item"><strong>MICR:</strong> {{ branchDetails.MICR }}</div>
+          <div class="grid-item"><strong>SWIFT:</strong> {{ branchDetails.SWIFT }}</div>
+          <div class="grid-item"><strong>UPI Enabled:</strong> {{ branchDetails.UPI ? 'Yes' : 'No' }}</div>
+        </div>
+      </div>
 
-      <button pButton type="button" label="Back" (click)="goToPreviousStep()"></button>
-      <button pButton type="button" label="Next" (click)="goToNextStep()"></button>
+    
+      <ion-button type="button" (click)="goToPreviousStep()">Back</ion-button>
+      <ion-button type="button" (click)="goToNextStep()" [disabled]="!isStepValid()">Next</ion-button>
     </div>
+    
 
     <div *ngIf="currentStep === 2">
       <h3>Account Details</h3>
@@ -120,64 +152,47 @@
           <div class="p-field">
             <label for="accountName">Account Name</label>
             <input pInputText id="accountName" formControlName="accountName" />
-            <!-- <div *ngIf="stepForm.get('accountName').invalid && stepForm.get('accountName').touched" class="error-message">
-              Account Name is required and must be at least 2 characters long.
-            </div> -->
           </div>
       
           <div class="p-field">
             <label for="bankName">Bank Name</label>
             <input pInputText id="bankName" formControlName="bankName" />
-            <!-- <div *ngIf="stepForm.get('bankName').invalid && stepForm.get('bankName').touched" class="error-message">
-              Bank Name is required.
-            </div> -->
           </div>
       
           <div class="p-field">
             <label for="accountNumber">Account Number</label>
             <input pInputText id="accountNumber" formControlName="accountNumber" />
-            <!-- <div *ngIf="stepForm.get('accountNumber').invalid && stepForm.get('accountNumber').touched" class="error-message">
-              Account Number is required and must be between 10 and 15 characters long.
-            </div> -->
           </div>
       
           <div class="p-field">
             <label for="ifscCode">IFSC Code</label>
             <input pInputText id="ifscCode" formControlName="ifscCode" />
-            <!-- <div *ngIf="stepForm.get('ifscCode').invalid && stepForm.get('ifscCode').touched" class="error-message">
-              IFSC Code is required.
-            </div> -->
           </div>
       
           <div class="p-field">
             <label for="branch">Branch</label>
             <input pInputText id="branch" formControlName="branch" />
-            <!-- <div *ngIf="stepForm!= null && stepForm.get('branch') && stepForm.get('branch').touched" class="error-message">
-              Branch is required and must be at least 2 characters long.
-            </div> -->
           </div>
       
           <div class="p-field">
             <label for="state">State</label>
             <input pInputText id="state" formControlName="state" />
-            <!-- <div *ngIf="stepForm.get('state').invalid && stepForm.get('state').touched" class="error-message">
-              State is required.
-            </div> -->
           </div>
       
           <div class="p-field">
             <label for="city">City (Optional)</label>
             <input pInputText id="city" formControlName="city" />
           </div>
-      
+
           <div class="p-field">
-            <label for="searchBank">Search Bank (Optional)</label>
-            <input pInputText id="searchBank" formControlName="searchBank" />
+            <label for="currentBalance">Current Balance</label>
+            <p-inputNumber inputId="integeronly" id="currentBalance" formControlName="currentBalance"/>
           </div>
       
           <div class="button-group">
-            <button pButton type="button" label="Back" (click)="goToPreviousStep()"></button>
-            <button pButton type="submit" label="Next"></button>
+            <ion-button type="button"(click)="goToPreviousStep()">Back</ion-button>
+            <ion-button type="button"(click)="goToNextStep()" [disabled]="!isStepValid()">Next</ion-button>
+      
           </div>
         </form>
       </div>
@@ -187,26 +202,21 @@
     <div *ngIf="currentStep === 3">
       <h3>Confirmation</h3>
     
-      <p><strong>Bank Name:</strong> {{ stepForm.get('bankName')?.value }}</p>
-      <p>{{stepForm.get('bankName')?.value}}</p>
-      <p><strong>State:</strong> {{ stepForm.get('state')?.value }}</p>
-      <p><strong>Type:</strong> {{ searchType }}</p>
-    
-      <p *ngIf="searchType === 'ifsc'">
-        <strong>IFSC Code:</strong> {{ stepForm.get('ifscCode')?.value }}
-      </p>
-    
-      <p *ngIf="searchType === 'search'">
-        <strong>Branch:</strong> {{ bankDetails?.branchName }}</p>
-      <p><strong>Account Number:</strong> {{ stepForm.get('accountNumber')?.value }}</p>
-      <p><strong>Branch Name:</strong> {{ stepForm.get('branch')?.value }}</p>
+      <div class="grid-container">
+        <div class="grid-item"><strong>Bank Name:</strong> {{ stepForm.get('bankName')?.value }}</div>
+        <div class="grid-item"><strong>State:</strong> {{ stepForm.get('state')?.value }}</div>
+        <div class="grid-item"><strong>Branch:</strong> {{ branchDetails?.BRANCH }}</div>
+        <div class="grid-item"><strong>IFSC Code:</strong> {{ stepForm.get('ifscCode')?.value }}</div>
+        <div class="grid-item"><strong>Account Number:</strong> {{ stepForm.get('accountNumber')?.value }}</div>
+        <div class="grid-item"><strong>Account Holder Name:</strong> {{ stepForm.get('accountName')?.value }}</div>
+        <div class="grid-item"><strong>Current Balance:</strong> {{ stepForm.get('currentBalance')?.value }}</div>
+      </div>
     
       <div class="button-group">
-        <button pButton type="button" label="Back" (click)="goToPreviousStep()"></button>
-        <button pButton type="button" label="Submit" (click)="onSubmit()"></button>
+        <ion-button type="button"(click)="goToPreviousStep()">Back</ion-button>
+        <ion-button type="button" (click)="onSubmit()">Submit</ion-button>
       </div>
-    </div>
-    
-    
+    </div>    
   </div>
+  </ion-content>
 

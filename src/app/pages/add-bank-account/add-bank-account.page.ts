@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { MenuItem, MessageService } from 'primeng/api';
 import { BankAccountService } from 'src/app/services/bank-account.service';
 
@@ -23,20 +24,44 @@ export class AddBankAccountPage implements OnInit {
   filteredBankNames: any[] = [];
   selectedBankCode: string = '';
   selectedStateCode: string = '';
-  bankDetails: any;
-  searchType: any;//string = ''; // Set default as empty string
+  // bankDetails: any;
+  searchType: any = 'ifsc';//string = ''; // Set default as empty string
   ifscCode: string = '';
   branchResults: any[] = [];
+  branchDetails: {
+    BANK: string;
+    BANKCODE: string;
+    BRANCH: string;
+    ADDRESS: string;
+    CITY: string;
+    DISTRICT: string;
+    STATE: string;
+    IFSC: string;
+    CONTACT: string;
+    MICR: string;
+    SWIFT: string | null;
+    IMPS: boolean;
+    NEFT: boolean;
+    RTGS: boolean;
+    UPI: boolean;
+  } | null = null;
   ifscResults: any[] = [];
   selectedBranch: any;
   searchBranch: string = '';
   offset = 0;
   limit = 10;
+  totalRecords: number = 0;
+  activeIndex: number = 0;
+  
+  // onActiveIndexChange(event: number) {
+  //     this.activeIndex = event;
+  // }
 
   constructor(
     private fb: FormBuilder,
     private bankAccountService: BankAccountService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private toastController: ToastController 
   ) {
     this.stepForm = this.fb.group({
       accountName: ['', [Validators.required, Validators.minLength(2)]],
@@ -46,16 +71,17 @@ export class AddBankAccountPage implements OnInit {
       branch: ['', [Validators.required, Validators.minLength(2)]],
       state: ['', Validators.required],
       city: [''],
-      searchBank: [''],
+      currentBalance: ['', [Validators.required, Validators.min(0)]], // Added currentBalance field
+      bank: ['']
     });
   }
 
   ngOnInit(): void {
     this.items = [
-      { label: 'Initialization', command: () => this.currentStep = 0 },
-      { label: 'Bank Details', command: () => this.currentStep = 1 },
-      { label: 'Account Details', command: () => this.currentStep = 2 },
-      { label: 'Confirmation', command: () => this.currentStep = 3 }
+      { label: 'Initial', command: () => {this.currentStep = 0; this.activeIndex=0} },
+      { label: 'Bank Info', command: () => {this.currentStep = 1; this.activeIndex=1} },
+      { label: 'Account Info', command: () => {this.currentStep = 2; this.activeIndex=2} },
+      { label: 'Confirm', command: () => {this.currentStep = 3; this.activeIndex=3} }
     ];
 
     this.loadBankNames();
@@ -155,33 +181,98 @@ export class AddBankAccountPage implements OnInit {
     this.stepForm.patchValue({ state: event.value.name });
   }
 
+  // goToNextStep() {
+  //   // if (this.stepForm.valid || this.currentStep === 0) {
+  //   if(true){
+  //     console.log("",this.searchType);
+  //     if(this.currentStep === 0){
+  //     this.loadBranches();}
+  //     this.currentStep++;
+  //   } else {
+  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields' });
+  //   }
+  // }
+
+  // goToPreviousStep() {
+  //   // if (this.stepForm.valid) {
+  //   if(true){
+  //     this.currentStep--;
+  //   } else {
+  //     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields' });
+  //   }
+  // }
+
   goToNextStep() {
-    // if (this.stepForm.valid || this.currentStep === 0) {
-    if(true){
-      console.log("",this.searchType);
-      if(this.currentStep === 0){
-      this.loadBranches();}
+    if (this.currentStep === 0 && this.isStepValid()) {
       this.currentStep++;
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields' });
+      this.activeIndex++;
+      this.loadBranches();
+    } else if (this.currentStep === 1 && this.isStepValid()) {
+      this.currentStep++;
+      this.activeIndex++;
+    } else if (this.currentStep === 2 && this.isStepValid()) {
+      this.currentStep++;
+      this.activeIndex++;
     }
   }
 
   goToPreviousStep() {
-    // if (this.stepForm.valid) {
-    if(true){
+    if (this.currentStep > 0) {
       this.currentStep--;
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields' });
+      this.activeIndex--;
     }
   }
 
+  isStepValid(): boolean {
+    if (this.currentStep === 0) {
+      return !!this.selectedBankCode && !!this.selectedStateCode && !!this.searchType;
+    } else if (this.currentStep === 1) {
+      if (this.searchType === 'ifsc') {
+        return !!this.ifscCode;
+      } else if (this.searchType === 'search') {
+        return !!this.selectedBranch;
+      }
+    } else if (this.currentStep === 2) {
+      return this.stepForm.valid;
+    }
+    return true;
+  }
+
+  onActiveIndexChange(event: number) {
+    if (event < this.activeIndex) {
+      this.goToPreviousStep();
+    } else if (event > this.activeIndex && this.isStepValid()) {
+      this.goToNextStep();
+    }
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Bank account details saved successfully',
+      duration: 2000, // Duration in milliseconds
+      position: 'top'
+    });
+    toast.present();
+  }
+  
   onSubmit() {
-    console.log("Came to onsub")
+    console.log("Came to onsub");
+    
     if (this.stepForm.valid) {
       this.bankAccountService.saveBankAccountDetails(this.stepForm.value).subscribe(response => {
         console.log(response);
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Bank account details saved successfully' });
+  
+        // Show success toast
+        this.presentToast();
+  
+        // Reset the form and navigate to the first step
+        this.stepForm.reset();
+        this.selectedBankCode = '';
+        this.selectedStateCode = '';
+        this.searchType = '';
+        this.branchDetails = null;
+        this.currentStep = 0;
+        this.activeIndex = 0;
       });
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields' });
@@ -201,36 +292,50 @@ export class AddBankAccountPage implements OnInit {
     }
   }
 
+  onLazyLoad(event: any) {
+    console.log(event);
+    this.offset = event.first;
+    this.limit = event.rows;
+    this.loadBranches(); // Fetch data based on the current offset and limit
+  }
+
   loadBranches() {
-    console.log("Came to load branches")
     this.bankAccountService.searchBranches(this.selectedBankCode, this.selectedStateCode, this.limit, this.offset)
-      .subscribe(data => {
-        console.log(data)
-        this.branchResults = data.data || []; // Assuming data contains a data array
-        if (this.branchResults.length === 0) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No branches found' });
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.branchResults = data.data || [];
+          this.totalRecords = data.count; // Total number of records in the backend
+          if (this.branchResults.length === 0) {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No branches found' });
+          }
+        },
+        error: (error) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load branches' });
         }
       });
   }
-
-  onLazyLoad(event: any) {
-    this.offset = event.first;
-    this.limit = event.rows;
-    this.loadBranches(); // Re-fetch the data with the new offset and limit
-  }
+  
 
   selectBank(bank: any) {
-    console.log("Came to fn after click")
-    console.log(bank)
+    console.log("Came to fn after click");
+    console.log(bank);
+  
     // Handle the selection of a bank from the IFSC search results
     this.stepForm.patchValue({
-      bankName: bank.bankName,
-      branch: bank.branch,
-      city: bank.city,
-      state: bank.state
+      bankName: bank.BANK, // Adjusted to match the correct key in the bank object
+      branch: bank.BRANCH,
+      city: bank.CITY,
+      state: bank.STATE,
+      ifscCode: bank.IFSC,
+      bank: bank
     });
-    this.bankDetails = bank;
+  
+    this.branchDetails = bank;
+    console.log(this.branchDetails);
+    console.log(this.stepForm);
   }
+  
 
   selectBranch(branch: any) {
     // Handle the selection of a branch from the branch search results
