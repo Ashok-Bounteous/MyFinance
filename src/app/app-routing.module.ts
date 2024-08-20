@@ -77,6 +77,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
+    path: 'bank-details',
+    loadChildren: () => import('./pages/bank-details/bank-details.module').then( m => m.BankDetailsPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'landing',
   },

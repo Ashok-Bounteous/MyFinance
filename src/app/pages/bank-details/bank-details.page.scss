@@ -1,0 +1,51 @@
+/* Custom styles for bank-details page */
+
+.account-card {
+    border: 1px solid var(--card-border-color, #ddd);
+    border-radius: var(--card-border-radius, 8px);
+    box-shadow: var(--card-box-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
+    margin: 0.5rem;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 1rem;
+  }
+
+  ion-toolbar {
+    color: var(--ion-color-primary);
+  }
+  
+  ion-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-item {
+    background-color: var(--ion-color-background-contrast, #f9f9f9);
+    color: var(--ion-color-primary);
+    padding: 0.5rem;
+    border-radius: var(--card-item-border-radius, 4px);
+    border: 1px solid var(--card-item-border-color, #e0e0e0);
+  }
+  h3 {
+    color: var(--ion-color-primary);
+  }
+  
+  ion-card-header {
+    background: var(--ion-color-background-contrast, #f4f4f4);
+    margin-bottom: 0.5rem;
+  }
+  
+  ion-card-title {
+    color: var(--ion-color-primary, #333);
+  }
+  
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+  }
+  

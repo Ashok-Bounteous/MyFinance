@@ -78,6 +78,11 @@ export class BankAccountService {
         })
       );
     }
+
+      // Fetch bank account details for a specific user
+  getBankAccountDetails(uid: string): Observable<any[]> {
+    return this.db.list(`${this.userBankHistoryPath}${uid}`).valueChanges();
+  }
 }
 
 // saveBankAccountDetails(details: any): Observable<any> {

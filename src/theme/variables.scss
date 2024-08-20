@@ -66,4 +66,14 @@ $high-priority: #f44336; /* Red for high priority */
   --ion-color-low-priority: var(--low-priority);
   --ion-color-medium-priority: var(--medium-priority);
   --ion-color-high-priority: var(--high-priority);
+
+    --card-border-color: #ddd;
+    --card-border-radius: 8px;
+    --card-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --card-item-background: #f9f9f9;
+    --card-item-border-radius: 4px;
+    --card-item-border-color: #e0e0e0;
+    --card-header-background: #f4f4f4;
+    --card-title-color: #333;  
+  
 }
