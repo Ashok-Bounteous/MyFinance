@@ -1,14 +1,69 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
-:root {
-    --ion-color-primary: purple;
-    --ion-color-secondary: #3dc2ff;
-    --ion-color-tertiary: #5260ff;
-    --ion-color-success: #2dd36f;
-    --ion-color-warning: #ffc409;
-    --ion-color-danger: #eb445a;
-    --ion-color-dark: #222428;
-    --ion-color-medium: #92949c;
-    --ion-color-light: #f4f5f8;
-  }
+// :root {
+//     --ion-color-primary: purple;
+//     --ion-color-secondary: #3dc2ff;
+//     --ion-color-tertiary: #5260ff;
+//     --ion-color-success: #2dd36f;
+//     --ion-color-warning: #ffc409;
+//     --ion-color-danger: #eb445a;
+//     --ion-color-dark: #222428;
+//     --ion-color-medium: #92949c;
+//     --ion-color-light: #f4f5f8;
+//   }
   
+
+// Primary Colors
+$primary-color: #0D6EFD; /* Finance blue */
+$secondary-color: #5A5A5A; /* Neutral gray */
+$text-color: #FFFFFF; /* White text */
+$background-color: #0A4275; /* Deep blue for navbar background */
+$hover-color: #063D6B; /* Darker blue for hover effects */
+$background-light: #0F7CE5; /* Lighter blue for section backgrounds */
+$background-dark: #08458F; /* Darker blue for contrast sections */
+$low-priority: #2196f3; /* Blue for low priority */
+$medium-priority: #ff9800; /* Orange for medium priority */
+$high-priority: #f44336; /* Red for high priority */
+
+
+// Ionic Color Variables
+:root {
+  --ion-color-primary: #0D6EFD; /* Finance blue */
+  --ion-color-primary-rgb: 13, 110, 253;
+  --ion-color-primary-contrast: #FFFFFF; /* White text */
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+
+  --ion-color-secondary: #5A5A5A; /* Neutral gray */
+  --ion-color-secondary-rgb: 90, 90, 90;
+  --ion-color-secondary-contrast: #FFFFFF; /* White text */
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+
+  --ion-color-dark: #0A4275; /* Deep blue for navbar background */
+  --ion-color-dark-rgb: 10, 66, 117;
+  --ion-color-dark-contrast: #FFFFFF; /* White text */
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+
+  --ion-color-light: #b2daff; /* Lighter blue for section backgrounds */
+  --ion-color-light-rgb: 15, 124, 229;
+  --ion-color-light-contrast: #FFFFFF; /* White text */
+  --ion-color-light-contrast-rgb: 255, 255, 255;
+
+  --ion-color-background: #08458F; /* Darker blue for contrast sections */
+  --ion-color-background-rgb: 8, 69, 143;
+  --ion-color-background-contrast: #f0fffe; /* White text */
+  --ion-color-background-contrast-rgb: 255, 255, 255;
+
+  --ion-color-hover: #063D6B; /* Darker blue for hover effects */
+  --ion-color-hover-rgb: 6, 61, 107;
+
+  --ion-color-success: #28a745; /* Success color */
+  --ion-color-warning: #ffc107; /* Warning color */
+  --ion-color-danger: #dc3545; /* Danger color */
+  --ion-color-medium: #6c757d; /* Medium color for borders */
+  --ion-color-medium-rgb: 108, 117, 125;
+
+
+  --ion-color-low-priority: var(--low-priority);
+  --ion-color-medium-priority: var(--medium-priority);
+  --ion-color-high-priority: var(--high-priority);
+}

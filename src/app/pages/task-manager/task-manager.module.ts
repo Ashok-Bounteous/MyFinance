@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TaskManagerPageRoutingModule } from './task-manager-routing.module';
 import { TaskManagerPage } from './task-manager.page';
 import { TaskService } from 'src/app/services/task.service';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 // If you have a shared module, import it here
 // import { SharedModule } from '../shared/shared.module';
@@ -15,7 +16,7 @@ import { TaskService } from 'src/app/services/task.service';
     FormsModule,
     IonicModule,
     TaskManagerPageRoutingModule,
-    // SharedModule // Uncomment this if you have a shared module
+    SharedModule // Uncomment this if you have a shared module
   ],
   declarations: [TaskManagerPage],
   providers: [TaskService]

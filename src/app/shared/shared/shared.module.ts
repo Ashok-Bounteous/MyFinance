@@ -21,7 +21,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TreeModule } from 'primeng/tree'
 import { ListboxModule } from 'primeng/listbox'
 import { OrganizationChartModule } from 'primeng/organizationchart';
-import {ToggleButtonModule} from 'primeng/togglebutton'
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import { DialogModule } from 'primeng/dialog'
 @NgModule({
   declarations: [],
   imports: [
@@ -47,7 +48,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton'
     ListboxModule,
     TreeModule,
     ToggleButtonModule,
-    OrganizationChartModule
+    OrganizationChartModule,
+    DialogModule
   ],
   exports: [
     CommonModule,
@@ -72,7 +74,8 @@ import {ToggleButtonModule} from 'primeng/togglebutton'
     ListboxModule,
     TreeModule,
     ToggleButtonModule,
-    OrganizationChartModule
+    OrganizationChartModule,
+    DialogModule
   ]
 })
 export class SharedModule { }
