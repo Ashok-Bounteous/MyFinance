@@ -1,64 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Budget Planning</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged()">
-    <ion-segment-button value="view">
-      <ion-label>View Budget</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="new">
-      <ion-label>New Budget</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="edit">
-      <ion-label>Edit Budget</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
-  <div [ngSwitch]="selectedSegment">
-    <ion-grid *ngSwitchCase="'view'">
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Year/Month</ion-label>
-            <ion-select [(ngModel)]="selectedPeriod" (ionChange)="loadBudget()">
-              <ion-select-option *ngFor="let period of availablePeriods" [value]="period">{{ period }}</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <canvas id="viewBudgetChart"></canvas>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <div *ngSwitchCase="'new'">
-      <app-new-budget></app-new-budget>
-    </div>
-
-    <div *ngSwitchCase="'edit'">
-      <app-edit-budget></app-edit-budget>
-    </div>
-  </div>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="showNewBudgetForm()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</ion-content> -->
-
-
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Budget Planning</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
   <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged()">
     <ion-segment-button value="view">
@@ -87,11 +26,12 @@
   </div>
 
   <!-- Floating Action Button to Add New Budget -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="showNewBudgetForm()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>
 
 

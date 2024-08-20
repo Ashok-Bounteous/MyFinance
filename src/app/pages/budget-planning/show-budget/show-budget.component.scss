@@ -1,6 +1,6 @@
 .budget-container {
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--ion-color-background-contrast);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
@@ -14,7 +14,7 @@
 }
 
 .year-selection, .month-selection {
-  background-color: #ffffff;
+  background-color: var(--ion-color-light-contrast);
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -35,13 +35,13 @@
 .data-container {
   display: flex;
   flex-wrap: wrap;
-  
   gap: 20px;
 }
 
 .table-container {
   flex: 1;
-  background-color: #ffffff;
+  background-color: var(--ion-color-background-contrast);
+  color: var(--ion-color-background);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -57,11 +57,12 @@
 
 .budget-table th, .budget-table td {
   padding: 10px;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid var(--ion-color-medium);
 }
 
 .budget-table th {
-  background-color: #f4f4f4;
+  background-color: var(--ion-color-background-contrast);
+  color: var(--ion-color-background);
   font-weight: bold;
 }
 
@@ -74,24 +75,17 @@
 
 .chart-container {
   flex: 1;
-  // display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--ion-color-background-contrast);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  // max-height: 400px;
-  // max-width: 450px;
-  // min-width: 450px;
   width: 450px;
 }
 
 p-chart {
   width: 100%;
-  // height: auto;
-  // max-width: 400px;
-  // min-width: 400px;
 }
 
 @media (max-width: 768px) {

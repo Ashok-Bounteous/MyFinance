@@ -2,6 +2,8 @@
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
+  background-color: var(--ion-color-background-contrast);
+  color: var(--ion-color-primary);
 
   .form-row {
     display: flex;
@@ -24,10 +26,12 @@
     label {
       display: block;
       margin-bottom: 5px;
+      color: var(--ion-color-primary); // Update label color
     }
 
     p {
       margin: 0;
+      color: var(--ion-color-dark); // Update paragraph text color
     }
   }
 
@@ -39,7 +43,57 @@
     .chart-container,
     .table-container {
       width: 100%; // Ensure the containers take full width
+      background-color: var(--ion-color-background-contrast); // Update background color
+      padding: 20px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      p-table{
+        margin:auto;
+        color: var(--ion-color-primary);
+        background-color: var(--ion-color-background-contrast);
+      }
     }
+
+    .table-container {
+      padding: 1rem;
+    }
+    
+    .custom-table {
+      width: 100%;
+      color: #ffffff; // Text color
+      background-color: #007bff; // Background color
+    }
+    
+    .custom-header {
+      color: #ffffff; // Header text color
+      background-color: #0056b3; // Header background color
+    }
+    
+    .custom-row {
+      color: var(--ion-color-primary);; // Row text color
+      background-color: var(--ion-color-background-contrast); // Row background color
+    
+      &:hover {
+        background-color: #e9ecef; // Row hover background color
+      }
+    }
+    
+    .custom-category-column {
+      width: 70%; // Width for Category column
+      color: var(--ion-color-primary);; // Row text color
+      background-color: var(--ion-color-background-contrast); // Row background color
+    
+    }
+    
+    .custom-amount-column, .custom-amount-column p-inputNumber {
+      width: 30%; // Width for Amount column
+      color: var(--ion-color-primary);; // Row text color
+      background-color: var(--ion-color-background-contrast); // Row background color
+    
+    }
+    
 
     // Styles for large screens
     @media (min-width: 768px) {
@@ -53,10 +107,16 @@
   }
 
   .p-button-full {
-    width: 100%; // Make the button full width
+    max-width: 100%; // Make the button full width
+    min-width: 100px;
+    margin:auto;
+    margin-top: 16px;
+    background-color: var(--ion-color-primary-contrast); // Update button background color
+    color: var(--ion-color-primary); // Update button text color
   }
 
   .loading-spinner {
     margin-top: 20px; // Adjust spacing if needed
+    color: var(--ion-color-secondary); // Update spinner color
   }
 }
