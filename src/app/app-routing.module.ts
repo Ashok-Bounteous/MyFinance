@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth/auth-guard.service';  // Adjust the imp
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate} from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogIn = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['dashboard']);
 
 const routes: Routes = [
   {
@@ -50,11 +50,13 @@ const routes: Routes = [
   },
   {
     path: 'add-bank-account',
-    loadChildren: () => import('./pages/add-bank-account/add-bank-account.module').then(m => m.AddBankAccountPageModule)
+    loadChildren: () => import('./pages/add-bank-account/add-bank-account.module').then(m => m.AddBankAccountPageModule),
+    ...canActivate(redirectUnauthorizedToLogIn)
   },
   {
     path: 'budget-planning',
-    loadChildren: () => import('./pages/budget-planning/budget-planning.module').then(m => m.BudgetPlanningPageModule)
+    loadChildren: () => import('./pages/budget-planning/budget-planning.module').then(m => m.BudgetPlanningPageModule),
+    ...canActivate(redirectUnauthorizedToLogIn)
   },
   {
     path: 'sample',
@@ -66,19 +68,23 @@ const routes: Routes = [
   },
   {
     path: 'transactions',
-    loadChildren: () => import('./pages/transactions/transactions.module').then( m => m.TransactionsPageModule)
+    loadChildren: () => import('./pages/transactions/transactions.module').then( m => m.TransactionsPageModule),
+    ...canActivate(redirectUnauthorizedToLogIn)
   },
   {
     path: 'past-transactions',
-    loadChildren: () => import('./pages/past-transactions/past-transactions.module').then( m => m.PastTransactionsPageModule)
+    loadChildren: () => import('./pages/past-transactions/past-transactions.module').then( m => m.PastTransactionsPageModule),
+    ...canActivate(redirectUnauthorizedToLogIn)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogIn)
   },
   {
     path: 'bank-details',
-    loadChildren: () => import('./pages/bank-details/bank-details.module').then( m => m.BankDetailsPageModule)
+    loadChildren: () => import('./pages/bank-details/bank-details.module').then( m => m.BankDetailsPageModule),
+    ...canActivate(redirectUnauthorizedToLogIn)
   },
   {
     path: '**',

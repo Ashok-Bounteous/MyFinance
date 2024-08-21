@@ -6,7 +6,7 @@
   <ion-avatar (click)="openProfilePopover($event)" slot="end">
     <img *ngIf="profileImageUrl; else defaultAvatar" [src]="profileImageUrl" alt="Profile Picture">
     <ng-template #defaultAvatar>
-      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-icon name="person-circle-outline" size="large"></ion-icon>
     </ng-template>
   </ion-avatar>
   <!-- <ion-button (click)="onLogout()" fill="outline" shape="round" slot="primary">
